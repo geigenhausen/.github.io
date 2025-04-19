@@ -1,0 +1,124 @@
+/* === Base styling === */
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+  background-color: #e6f7ff; /* Sky blue base */
+  color: #1e2a33;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* === Header === */
+header {
+  background: linear-gradient(to bottom, #cceeff, #b3e0ff);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  color: #003366;
+}
+
+header p {
+  margin: 0.5rem 0;
+  color: #336699;
+}
+
+/* === Controls === */
+.header-controls {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+select,
+button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #aacce6;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* === Main Content === */
+main {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+section.country {
+  margin-bottom: 2rem;
+  border-left: 4px solid #77ccff;
+  padding-left: 1rem;
+}
+
+summary {
+  font-weight: bold;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  color: #005580;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #336699;
+  transition: color 0.2s;
+}
+
+ul li a:hover {
+  color: #003355;
+}
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background: #cceeff;
+  border-top: 1px solid #aaddff;
+  color: #003366;
+}
+
+/* === Dark mode === */
+body.dark-mode {
+  background-color: #1e1f26;
+  color: #ddd;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background: #2b2f36;
+  color: #ccc;
+}
+
+body.dark-mode section.country {
+  border-left: 4px solid #66bfff;
+}
+
+body.dark-mode ul li a {
+  color: #8ecfff;
+}
+
+body.dark-mode ul li a:hover {
+  color: #ffffff;
+}
+
+body.dark-mode select,
+body.dark-mode button {
+  background: #444;
+  color: #eee;
+  border-color: #666;
+}
