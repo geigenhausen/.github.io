@@ -11,12 +11,16 @@
     <h1>Travel Photography</h1>
     <p>Explore by country & region</p>
 
-    <label for="language-select">🌐 Language:</label>
-    <select id="language-select" onchange="changeLanguage(this.value)">
-      <option value="en">English</option>
-      <option value="fr">Français</option>
-      <option value="ja">日本語</option>
-    </select>
+    <div class="header-controls">
+      <label for="language-select">🌐 Language:</label>
+      <select id="language-select" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="ja">日本語</option>
+      </select>
+
+      <button id="theme-toggle">🌓 Theme</button>
+    </div>
   </header>
 
   <main>
@@ -52,8 +56,11 @@
   <script>
     function changeLanguage(lang) {
       alert("This is where you'd load the site in: " + lang + " (multilingual support coming soon)");
-      // In the future, you can use JavaScript or static site generators to actually swap content here.
     }
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
   </script>
 </body>
 </html>
