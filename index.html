@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Photo Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>My Travel Photography</h1>
+    <p>Explore by country & region</p>
+
+    <label for="language-select">🌐 Language:</label>
+    <select id="language-select" onchange="changeLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ja">日本語</option>
+    </select>
+  </header>
+
+  <main>
+    <section class="country">
+      <details open>
+        <summary>🇯🇵 Japan</summary>
+        <ul>
+          <li><a href="#tokyo">Tokyo</a></li>
+          <li><a href="#kyoto">Kyoto</a></li>
+          <li><a href="#osaka">Osaka</a></li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="country">
+      <details>
+        <summary>🇫🇷 France</summary>
+        <ul>
+          <li><a href="#paris">Paris</a></li>
+          <li><a href="#lyon">Lyon</a></li>
+          <li><a href="#nice">Nice</a></li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- Add more countries/regions as needed -->
+  </main>
+
+  <footer>
+    <p>© 2025 My Photography</p>
+  </footer>
+
+  <script>
+    function changeLanguage(lang) {
+      alert("This is where you'd load the site in: " + lang + " (multilingual support coming soon)");
+      // In the future, you can use JavaScript or static site generators to actually swap content here.
+    }
+  </script>
+</body>
+</html>
