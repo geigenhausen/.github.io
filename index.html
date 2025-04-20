@@ -140,81 +140,60 @@
     </div>
   </footer>
 
-  <!-- Three.js is required for VANTA -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
-  <!-- VANTA -->
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-  <!-- GLightbox -->
-  <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+  <!-- Scripts - Place these right before closing body tag -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
   
-  <!-- Custom JavaScript -->
   <script>
-    // Make sure the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      try {
-        // Initialize VANTA background
-        const vantaEffect = VANTA.WAVES({
-          el: "#vanta-bg",
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
-          color: 0xa8d8ff,
-          shininess: 50.00,
-          waveHeight: 20.00,
-          waveSpeed: 1.00,
-          zoom: 0.85
-        });
+    // Wait for all resources to load
+    window.addEventListener('load', function() {
+      // Initialize VANTA
+      VANTA.WAVES({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xa8d8ff,
+        shininess: 50.00,
+        waveHeight: 20.00,
+        waveSpeed: 1.00,
+        zoom: 0.85
+      });
 
-        console.log('VANTA initialized successfully');
-      } catch (error) {
-        console.error('Error initializing VANTA:', error);
-      }
-
-      try {
-        // Initialize Lightbox
-        const lightbox = GLightbox({
-          selector: '.glightbox',
-          touchNavigation: true,
-          loop: true,
-          closeButton: true,
-          zoomable: true
-        });
-
-        console.log('Lightbox initialized successfully');
-      } catch (error) {
-        console.error('Error initializing Lightbox:', error);
-      }
+      // Initialize Lightbox
+      const lightbox = GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        closeButton: true,
+        zoomable: true
+      });
 
       // Theme toggle functionality
       const themeToggle = document.getElementById('theme-toggle');
-      if (themeToggle) {
-        // Function to set theme
-        function setTheme(isDark) {
-          document.body.classList.toggle('dark-mode', isDark);
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        }
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-          setTheme(true);
-        }
-
-        // Toggle theme on button click
-        themeToggle.addEventListener('click', () => {
-          const isDark = !document.body.classList.contains('dark-mode');
-          setTheme(isDark);
-          console.log('Theme toggled:', isDark ? 'dark' : 'light');
-        });
-
-        console.log('Theme toggle initialized successfully');
-      } else {
-        console.error('Theme toggle button not found');
+      
+      // Function to set theme
+      function setTheme(isDark) {
+        document.body.classList.toggle('dark-mode', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
       }
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        setTheme(true);
+      }
+
+      // Toggle theme on button click
+      themeToggle.addEventListener('click', () => {
+        const isDark = !document.body.classList.contains('dark-mode');
+        setTheme(isDark);
+      });
     });
   </script>
 </body>
