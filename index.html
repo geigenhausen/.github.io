@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="Explore worldwide travel photography featuring beautiful locations from Japan, France, and more" />
     <meta name="theme-color" content="#a8d8ff" />
     <title>Leo Photos | Travel & Worldwide Photography</title>
@@ -57,7 +57,7 @@
                             <div class="gallery">
                                 <article class="gallery-item" data-region="Tokyo">
                                     <div class="gallery-image-wrapper">
-                                            <img src="images/tokyo/DSCF0601.jpg" alt="Tokyo" loading="lazy" />
+                                        <img src="images/tokyo/DSCF0601.jpg" alt="Tokyo" loading="lazy" />
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Tokyo・東京</h3>
@@ -66,7 +66,7 @@
                                 </article>
                                 <article class="gallery-item" data-region="Ehime">
                                     <div class="gallery-image-wrapper">
-                                            <img src="images/ehime/DSCF1711.jpg" alt="Matsuyama Outskirts" loading="lazy"/>
+                                        <img src="images/ehime/DSCF1711.jpg" alt="Matsuyama Outskirts" loading="lazy"/>
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Ehime・愛媛</h3>
@@ -75,7 +75,7 @@
                                 </article>
                                 <article class="gallery-item" data-region="Other">
                                     <div class="gallery-image-wrapper">
-                                            <img src="images/sakura/IMG_5754.jpeg" alt="Cherry Blossoms in Full Bloom" loading="lazy" />
+                                        <img src="images/sakura/IMG_5754.jpeg" alt="Cherry Blossoms in Full Bloom" loading="lazy" />
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Cherry Blossom・桜</h3>
@@ -98,7 +98,7 @@
                             <div class="gallery">
                                 <article class="gallery-item" data-region="Paris">
                                     <div class="gallery-image-wrapper">
-                                            <img src="images/france/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy" />
+                                        <img src="images/france/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy" />
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Paris</h3>
@@ -107,7 +107,7 @@
                                 </article>
                                 <article class="gallery-item" data-region="Sud-ouest">
                                     <div class="gallery-image-wrapper">
-                                            <img src="images/france/cahors.jpg" alt="History and Cuisine" loading="lazy" />
+                                        <img src="images/france/cahors.jpg" alt="History and Cuisine" loading="lazy" />
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Cahors</h3>
@@ -120,7 +120,7 @@
                 </section>
             </div>
 
-                <!-- Sub-galleries -->
+            <!-- Sub-galleries -->
             <div class="sub-gallery" data-region="Tokyo">
                 <div class="sub-gallery-header">
                     <h2>Tokyo 東京</h2>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="gallery-item-info">
                             <h3>Sky Tree</h3>
-                            <p>Tokyo Tower best ennemy</p>
+                            <p>Tokyo Tower best enemy</p>
                         </div>
                     </article>
                 </div>
@@ -174,13 +174,13 @@
             
             <div class="sub-gallery" data-region="Other">
                 <div class="sub-gallery-header">
-                    <h2>Cherry Blossom/h2>
+                    <h2>Cherry Blossom</h2>
                     <button class="sub-gallery-close">×</button>
                 </div>
                 <div class="sub-gallery-grid">
                     <article class="sub-gallery-item">
                         <div class="gallery-image-wrapper">
-                            <a href="images/sakura/IMG_5754.jpeg" class="glightbox" data-gallery="ehime-full">
+                            <a href="images/sakura/IMG_5754.jpeg" class="glightbox" data-gallery="sakura-full">
                                 <img src="images/sakura/IMG_5754.jpeg" alt="Cherry Blossom" loading="lazy" />
                             </a>
                         </div>
@@ -213,249 +213,234 @@
         </footer>
     </div>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Create copyright notice modal
-    const modal = document.createElement('div');
-    modal.className = 'copyright-modal';
-    modal.innerHTML = `
-        <div class="copyright-content">
-            <h3>© Copyright Notice</h3>
-            <p>These images are protected by copyright law.</p>
-            <p>Unauthorized use, reproduction, or distribution is prohibited.</p>
-            <p>For licensing or usage inquiries, please contact:</p>
-            <p>batchat24@gmail.com</p>
-            <button class="modal-close">Close</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize elements
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const themeToggle = document.getElementById('theme-toggle');
+            const visitorCount = document.getElementById('visitor-count');
+            const backgroundElement = document.getElementById('background-image');
 
-    // Copyright protection function
-    function showCopyrightNotice() {
-        modal.classList.add('active');
-        setTimeout(() => modal.classList.remove('active'), 3000);
-    }
+            // Create copyright notice modal
+            const modal = document.createElement('div');
+            modal.className = 'copyright-modal';
+            modal.innerHTML = `
+                <div class="copyright-content">
+                    <h3>© Copyright Notice</h3>
+                    <p>These images are protected by copyright law.</p>
+                    <p>Unauthorized use, reproduction, or distribution is prohibited.</p>
+                    <p>For licensing or usage inquiries, please contact:</p>
+                    <p>batchat24@gmail.com</p>
+                    <button class="modal-close">Close</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
 
-    // Initialize Lightbox
-    const lightbox = GLightbox({
-        touchNavigation: true,
-        loop: true,
-        closeButton: true,
-        zoomable: true
-        selector: '.sub-gallery-item a' // Only target sub-gallery images
-     });
+            // Initialize Lightbox
+            const lightbox = GLightbox({
+                touchNavigation: true,
+                loop: true,
+                closeButton: true,
+                zoomable: true,
+                selector: '.sub-gallery-item a'
+            });
 
-    // Update gallery items click handling
-galleryItems.forEach(item => {
-    const itemInfo = item.querySelector('.gallery-item-info');
-    const image = item.querySelector('img');
-    
-    // Remove any existing click handlers from the image
-    image.style.pointerEvents = 'none';
-    
-    // Only handle clicks on the info section
-    itemInfo.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const region = item.closest('.gallery-item').getAttribute('data-region');
-        const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
-        
-        if (subGallery) {
-            subGallery.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-    });
-});
+            // Copyright protection function
+            function showCopyrightNotice() {
+                modal.classList.add('active');
+                setTimeout(() => modal.classList.remove('active'), 3000);
+            }
 
-    // Protection measures
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        showCopyrightNotice();
-    });
+            // Image loading handler
+            function handleImageLoad(img) {
+                img.classList.add('loaded');
+                const wrapper = img.closest('.gallery-image-wrapper');
+                if (wrapper) {
+                    wrapper.classList.add('loaded');
+                }
+            }
 
-    document.addEventListener('keydown', function(e) {
-        // Prevent PrintScreen
-        if (e.key === 'PrintScreen') {
-            e.preventDefault();
-            showCopyrightNotice();
-        }
+            function handleImageError(img) {
+                console.error('Failed to load image:', img.src);
+                const wrapper = img.closest('.gallery-image-wrapper');
+                if (wrapper) {
+                    wrapper.style.backgroundColor = '#f0f0f0';
+                    wrapper.innerHTML = `
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+                                    display: flex; align-items: center; justify-content: center; 
+                                    padding: 1rem; text-align: center;">
+                            Image failed to load
+                        </div>`;
+                }
+            }
 
-        // Prevent Ctrl/Cmd + S, Ctrl/Cmd + C, Ctrl/Cmd + I, Ctrl/Cmd + U, Ctrl/Cmd + P
-        if (e.ctrlKey || e.metaKey) {
-            switch (e.key.toLowerCase()) {
-                case 's':
-                case 'c':
-                case 'i':
-                case 'u':
-                case 'p':
+            // Initialize images
+            document.querySelectorAll('img').forEach(img => {
+                if (img.complete) {
+                    handleImageLoad(img);
+                } else {
+                    img.addEventListener('load', () => handleImageLoad(img));
+                }
+                img.addEventListener('error', () => handleImageError(img));
+            });
+
+            // Sub-gallery functionality
+            function openSubGallery(region) {
+                const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
+                if (subGallery) {
+                    subGallery.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeSubGallery() {
+                const activeSubGallery = document.querySelector('.sub-gallery.active');
+                if (activeSubGallery) {
+                    activeSubGallery.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Gallery item click handlers
+            galleryItems.forEach(item => {
+                const itemInfo = item.querySelector('.gallery-item-info');
+                
+                itemInfo.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const region = item.getAttribute('data-region');
+                    openSubGallery(region);
+                });
+            });
+
+            // Sub-gallery close handlers
+            document.querySelectorAll('.sub-gallery-close').forEach(button => {
+                button.addEventListener('click', closeSubGallery);
+            });
+
+            document.querySelectorAll('.sub-gallery').forEach(gallery => {
+                gallery.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeSubGallery();
+                    }
+                });
+            });
+
+            // Protection measures
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                showCopyrightNotice();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                // Close sub-gallery on ESC
+                if (e.key === 'Escape') {
+                    closeSubGallery();
+                    return;
+                }
+
+                // Prevent PrintScreen
+                if (e.key === 'PrintScreen') {
                     e.preventDefault();
                     showCopyrightNotice();
-                    break;
-            }
-        }
-    });
+                    return;
+                }
 
-    // Disable drag and drop
-    document.addEventListener('dragstart', function(e) {
-        e.preventDefault();
-    });
-
-    // Modal close functionality
-    modal.querySelector('.modal-close').addEventListener('click', function() {
-        modal.classList.remove('active');
-    });
-
-    // Blur protection
-    let blurTimeout;
-    window.addEventListener('blur', function() {
-        blurTimeout = setTimeout(() => {
-            document.body.classList.add('page-blurred');
-        }, 100);
-    });
-
-    window.addEventListener('focus', function() {
-        clearTimeout(blurTimeout);
-        document.body.classList.remove('page-blurred');
-    });
-
-    // Image loading handler
-    document.querySelectorAll('.gallery-image-wrapper img').forEach(img => {
-        if (img.complete) {
-            img.classList.add('loaded');
-        } else {
-            img.addEventListener('load', function() {
-                this.classList.add('loaded');
+                // Prevent Ctrl/Cmd + S, C, I, U, P
+                if (e.ctrlKey || e.metaKey) {
+                    switch (e.key.toLowerCase()) {
+                        case 's':
+                        case 'c':
+                        case 'i':
+                        case 'u':
+                        case 'p':
+                            e.preventDefault();
+                            showCopyrightNotice();
+                            break;
+                    }
+                }
             });
-        }
 
-        img.addEventListener('error', function() {
-            console.error('Failed to load image:', this.src);
-            this.parentElement.style.backgroundColor = '#ddd';
-            this.style.display = 'none';
-            this.parentElement.innerHTML += `
-                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-                            display: flex; align-items: center; justify-content: center; 
-                            padding: 1rem; text-align: center;">
-                    Image failed to load
-                </div>`;
-        });
-    });
+            // Disable drag and drop
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
 
-    // Gallery and Sub-gallery functionality
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryItems.forEach(item => {
-        const itemInfo = item.querySelector('.gallery-item-info');
-        
-        // Add click event to info section for sub-gallery
-        itemInfo.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const region = item.closest('.gallery-item').getAttribute('data-region');
-            const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
+            // Modal close functionality
+            modal.querySelector('.modal-close').addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+
+            // Blur protection
+            let blurTimeout;
+            window.addEventListener('blur', function() {
+                blurTimeout = setTimeout(() => {
+                    document.body.classList.add('page-blurred');
+                }, 100);
+            });
+
+            window.addEventListener('focus', function() {
+                clearTimeout(blurTimeout);
+                document.body.classList.remove('page-blurred');
+            });
+
+            // Visitor counter
+            function getVisitorCount() {
+                let count = localStorage.getItem('visitorCount');
+                return parseInt(count || '0');
+            }
+
+            function updateVisitorCount() {
+                let count = getVisitorCount();
+                count++;
+                localStorage.setItem('visitorCount', count);
+                visitorCount.textContent = count.toLocaleString();
+            }
+
+            updateVisitorCount();
+
+            // Theme toggle
+            function setTheme(isDark) {
+                document.body.classList.toggle('dark-mode', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+
+            // Initialize theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || 
+                (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                setTheme(true);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = !document.body.classList.contains('dark-mode');
+                setTheme(isDark);
+            });
+
+            // Background image
+            const backgroundImage = new Image();
             
-            if (subGallery) {
-                subGallery.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            backgroundImage.onload = function() {
+                backgroundElement.style.backgroundImage = `url('${this.src}')`;
+                backgroundElement.style.opacity = '1';
+            };
+
+            backgroundImage.onerror = function() {
+                console.error('Failed to load background image');
+                backgroundElement.style.backgroundColor = '#1a1a1a';
+            };
+
+            backgroundImage.src = 'wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
+
+            // Prevent details from closing when clicking gallery items
+            document.querySelectorAll('.gallery').forEach(gallery => {
+                gallery.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
         });
-    });
-
-    // Close sub-gallery functionality
-    function closeSubGallery() {
-        const activeSubGallery = document.querySelector('.sub-gallery.active');
-        if (activeSubGallery) {
-            activeSubGallery.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    }
-
-    // Close button handlers
-    document.querySelectorAll('.sub-gallery-close').forEach(button => {
-        button.addEventListener('click', closeSubGallery);
-    });
-
-    // Click outside to close
-    document.querySelectorAll('.sub-gallery').forEach(gallery => {
-        gallery.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeSubGallery();
-            }
-        });
-    });
-
-    // ESC key handler
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeSubGallery();
-        }
-    });
-
-    // Visitor counter functionality
-    const visitorCount = document.getElementById('visitor-count');
-    
-    function getVisitorCount() {
-        let count = localStorage.getItem('visitorCount');
-        return parseInt(count || '0');
-    }
-
-    function updateVisitorCount() {
-        let count = getVisitorCount();
-        count++;
-        localStorage.setItem('visitorCount', count);
-        visitorCount.textContent = count.toLocaleString();
-    }
-
-    updateVisitorCount();
-
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    function setTheme(isDark) {
-        document.body.classList.toggle('dark-mode', isDark);
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-
-    // Check saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        setTheme(true);
-    } else if (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        setTheme(true);
-    }
-
-    themeToggle.addEventListener('click', () => {
-        const isDark = !document.body.classList.contains('dark-mode');
-        setTheme(isDark);
-    });
-
-    // Background image loading with fallback
-    const backgroundImage = new Image();
-    const backgroundElement = document.getElementById('background-image');
-    
-    backgroundImage.onload = function() {
-        backgroundElement.style.backgroundImage = `url('${this.src}')`;
-        backgroundElement.style.opacity = '1';
-    };
-
-    backgroundImage.onerror = function() {
-        console.error('Failed to load background image');
-        backgroundElement.style.backgroundColor = '#1a1a1a';
-    };
-
-    // Load background image
-    backgroundImage.src = 'wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
-
-    // Prevent details from closing when clicking gallery items
-    document.querySelectorAll('.gallery').forEach(gallery => {
-        gallery.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    });
-});
-</script>
-    
-  </body>
+    </script>
+</body>
 </html>
