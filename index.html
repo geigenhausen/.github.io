@@ -56,27 +56,33 @@
                         <div class="gallery-preview">
                             <div class="gallery">
                                 <article class="gallery-item" data-region="Tokyo">
-                                    <a href="images/tokyo/tokyo-main.jpg" class="glightbox" data-gallery="japan">
-                                    <img src="images/tokyo/tokyo-main.jpg" alt="Tokyo Cityscape at Night" loading="lazy" />
-                                    </a>
+                                    <div class="gallery-image-wrapper">
+                                        <a href="images/tokyo/tokyo-main.jpg" class="glightbox" data-gallery="japan">
+                                            <img src="images/tokyo/tokyo-main.jpg" alt="Tokyo Cityscape at Night" loading="lazy" />
+                                        </a>
+                                    </div>
                                     <div class="gallery-item-info">
                                         <h3>Tokyo・東京</h3>
                                         <p>Capital of Japan</p>
                                     </div>
                                 </article>
                                 <article class="gallery-item" data-region="Ehime">
-                                     <a href="images/DSCF1615.jpeg" class="glightbox" data-gallery="japan">
-                                    <img src="images/DSCF1615.jpeg" alt="Matsuyama Castle" loading="lazy"/>
-                                    </a>    
+                                    <div class="gallery-image-wrapper">
+                                        <a href="images/DSCF1615.jpeg" class="glightbox" data-gallery="japan">
+                                            <img src="images/DSCF1615.jpeg" alt="Matsuyama Castle" loading="lazy"/>
+                                        </a>
+                                    </div>
                                     <div class="gallery-item-info">
                                         <h3>Ehime・愛媛</h3>
                                         <p>Historical castle and cherry blossom</p>
                                     </div>
                                 </article>
                                 <article class="gallery-item" data-region="Other">
-                                    <a href="images/japan/sakura.jpg" class="glightbox" data-gallery="japan">
-                                    <img src="images/japan/sakura.jpg" alt="Cherry Blossoms in Full Bloom" loading="lazy" />
-                                    </a>
+                                    <div class="gallery-image-wrapper">
+                                        <a href="images/japan/sakura.jpg" class="glightbox" data-gallery="japan">
+                                            <img src="images/japan/sakura.jpg" alt="Cherry Blossoms in Full Bloom" loading="lazy" />
+                                        </a>
+                                    </div>
                                     <div class="gallery-item-info">
                                         <h3>Cherry Blossom・桜</h3>
                                         <p>Spring beauty across Japan</p>
@@ -97,14 +103,22 @@
                         <div class="gallery-preview">
                             <div class="gallery">
                                 <article class="gallery-item" data-region="Paris">
-                                    <img src="images/france/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy" />
+                                    <div class="gallery-image-wrapper">
+                                        <a href="images/france/paris.jpg" class="glightbox" data-gallery="france">
+                                            <img src="images/france/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy" />
+                                        </a>
+                                    </div>
                                     <div class="gallery-item-info">
                                         <h3>Paris</h3>
                                         <p>City of Light and Romance</p>
                                     </div>
                                 </article>
                                 <article class="gallery-item" data-region="Sud-ouest">
-                                    <img src="images/france/cahors.jpg" alt="History and Cuisine" loading="lazy" />
+                                    <div class="gallery-image-wrapper">
+                                        <a href="images/france/cahors.jpg" class="glightbox" data-gallery="france">
+                                            <img src="images/france/cahors.jpg" alt="History and Cuisine" loading="lazy" />
+                                        </a>
+                                    </div>
                                     <div class="gallery-item-info">
                                         <h3>Cahors</h3>
                                         <p>Gourmet and history</p>
@@ -116,7 +130,7 @@
                 </section>
             </div>
 
-            <!-- Sub-galleries -->
+                <!-- Sub-galleries -->
             <div class="sub-gallery" data-region="Tokyo">
                 <div class="sub-gallery-header">
                     <h2>Tokyo 東京</h2>
@@ -124,13 +138,16 @@
                 </div>
                 <div class="sub-gallery-grid">
                     <article class="sub-gallery-item">
-                        <img src="images/tokyo/tokyo-main.jpg" alt="Tokyo Scene 1" loading="lazy" />
+                        <div class="gallery-image-wrapper">
+                            <a href="images/tokyo/tokyo-main.jpg" class="glightbox" data-gallery="tokyo-full">
+                                <img src="images/tokyo/tokyo-main.jpg" alt="Tokyo Scene 1" loading="lazy" />
+                            </a>
+                        </div>
                         <div class="gallery-item-info">
                             <h3>Shibuya</h3>
                             <p>The famous crossing at night</p>
                         </div>
                     </article>
-                    <!-- Add more Tokyo images here -->
                 </div>
             </div>
 
@@ -141,15 +158,16 @@
                 </div>
                 <div class="sub-gallery-grid">
                     <article class="sub-gallery-item">
-                        <a href="images/DSCF1615.jpeg" class="glightbox" data-gallery="japan">
-                        <img src="images/DSCF1615.jpeg" alt="Matsuyama Castle" loading="lazy" />
-                         </a>
+                        <div class="gallery-image-wrapper">
+                            <a href="images/DSCF1615.jpeg" class="glightbox" data-gallery="ehime-full">
+                                <img src="images/DSCF1615.jpeg" alt="Matsuyama Castle" loading="lazy" />
+                            </a>
+                        </div>
                         <div class="gallery-item-info">
                             <h3>Matsuyama Castle</h3>
                             <p>Historic castle view (April 2025)</p>
                         </div>
                     </article>
-                    <!-- Add more Ehime images here -->
                 </div>
             </div>
         </main>
@@ -190,10 +208,13 @@
             const galleryItems = document.querySelectorAll('.gallery-item');
             
             galleryItems.forEach(item => {
-                item.addEventListener('click', function(e) {
+                const itemInfo = item.querySelector('.gallery-item-info');
+                
+                // Add click event to info section for sub-gallery
+                itemInfo.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    const region = this.getAttribute('data-region');
+                    const region = item.closest('.gallery-item').getAttribute('data-region');
                     const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
                     
                     if (subGallery) {
@@ -288,18 +309,15 @@
             // Load background image
             backgroundImage.src = 'wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
 
-            // Lazy loading for gallery images
-            if ('loading' in HTMLImageElement.prototype) {
-                const images = document.querySelectorAll('img[loading="lazy"]');
-                images.forEach(img => {
-                    img.src = img.src;
+            // Image loading debug
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('error', function() {
+                    console.error('Failed to load image:', this.src);
                 });
-            } else {
-                // Fallback for browsers that don't support lazy loading
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-                document.body.appendChild(script);
-            }
+                img.addEventListener('load', function() {
+                    console.log('Successfully loaded image:', this.src);
+                });
+            });
 
             // Prevent details from closing when clicking gallery items
             document.querySelectorAll('.gallery').forEach(gallery => {
