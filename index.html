@@ -14,46 +14,17 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Lightbox CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-
-  <!-- Lightbox CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
-
-  <!-- Animated Background -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-  <script>
-  VANTA.WAVES({
-    el: "#vanta-bg",
-    mouseControls: true,
-    touchControls: true,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    color: 0xa8d8ff, // sky blue
-    shininess: 50.00,
-    waveHeight: 20.00,
-    waveSpeed: 1.00,
-    zoom: 0.85
-  });
-</script>
 </head>
-  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-<script>
-  const lightbox = GLightbox({
-    selector: '.glightbox',
-    touchNavigation: true,
-    loop: true,
-    closeButton: true,
-    zoomable: true,
-  });
-</script>
 <body>
   <div id="vanta-bg"></div>
+  
   <header class="site-header">
     <div class="header-content">
       <h1 class="site-title">
@@ -81,7 +52,6 @@
   </header>
 
   <main class="site-main">
-
     <div class="countries-grid">
       <section class="country-card" data-country="japan">
         <details open>
@@ -157,6 +127,74 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-content
-::contentReference[oaicite:6]{index=6}
- 
+    <div class="footer-content">
+      <div class="footer-info">
+        <p class="copyright">© 2024 Leo Photos Worldwide</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts - Place these right before closing body tag -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  
+  <script>
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize VANTA
+      VANTA.WAVES({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0xa8d8ff,
+        shininess: 50.00,
+        waveHeight: 20.00,
+        waveSpeed: 1.00,
+        zoom: 0.85
+      });
+
+      // Initialize Lightbox
+      const lightbox = GLightbox({
+        selector: '.glightbox',
+        touchNavigation: true,
+        loop: true,
+        closeButton: true,
+        zoomable: true,
+      });
+
+      // Theme toggle functionality
+      const themeToggle = document.getElementById('theme-toggle');
+      const body = document.body;
+      
+      themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
+      });
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+      }
+
+      // Language selector functionality
+      const languageSelect = document.getElementById('language-select');
+      languageSelect.addEventListener('change', (e) => {
+        const selectedLanguage = e.target.value;
+        // Add your language switching logic here
+        console.log('Language changed to:', selectedLanguage);
+      });
+    });
+  </script>
+</body>
+</html>
