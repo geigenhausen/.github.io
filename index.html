@@ -57,9 +57,7 @@
                             <div class="gallery">
                                 <article class="gallery-item" data-region="Tokyo">
                                     <div class="gallery-image-wrapper">
-                                        <a href="images/tokyo/DSCF0601.jpg" class="glightbox" data-gallery="japan">
                                             <img src="images/tokyo/DSCF0601.jpg" alt="Tokyo" loading="lazy" />
-                                        </a>
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Tokyo・東京</h3>
@@ -68,9 +66,7 @@
                                 </article>
                                 <article class="gallery-item" data-region="Ehime">
                                     <div class="gallery-image-wrapper">
-                                        <a href="images/ehime/DSCF1711.jpg" class="glightbox" data-gallery="japan">
                                             <img src="images/ehime/DSCF1711.jpg" alt="Matsuyama Outskirts" loading="lazy"/>
-                                        </a>
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Ehime・愛媛</h3>
@@ -79,9 +75,7 @@
                                 </article>
                                 <article class="gallery-item" data-region="Other">
                                     <div class="gallery-image-wrapper">
-                                        <a href="images/sakura/IMG_5754.jpeg" class="glightbox" data-gallery="japan">
                                             <img src="images/sakura/IMG_5754.jpeg" alt="Cherry Blossoms in Full Bloom" loading="lazy" />
-                                        </a>
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Cherry Blossom・桜</h3>
@@ -104,9 +98,7 @@
                             <div class="gallery">
                                 <article class="gallery-item" data-region="Paris">
                                     <div class="gallery-image-wrapper">
-                                        <a href="images/france/paris.jpg" class="glightbox" data-gallery="france">
                                             <img src="images/france/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy" />
-                                        </a>
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Paris</h3>
@@ -115,9 +107,7 @@
                                 </article>
                                 <article class="gallery-item" data-region="Sud-ouest">
                                     <div class="gallery-image-wrapper">
-                                        <a href="images/france/cahors.jpg" class="glightbox" data-gallery="france">
                                             <img src="images/france/cahors.jpg" alt="History and Cuisine" loading="lazy" />
-                                        </a>
                                     </div>
                                     <div class="gallery-item-info">
                                         <h3>Cahors</h3>
@@ -254,7 +244,30 @@ document.addEventListener('DOMContentLoaded', function() {
         loop: true,
         closeButton: true,
         zoomable: true
+        selector: '.sub-gallery-item a' // Only target sub-gallery images
+     });
+
+    // Update gallery items click handling
+galleryItems.forEach(item => {
+    const itemInfo = item.querySelector('.gallery-item-info');
+    const image = item.querySelector('img');
+    
+    // Remove any existing click handlers from the image
+    image.style.pointerEvents = 'none';
+    
+    // Only handle clicks on the info section
+    itemInfo.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const region = item.closest('.gallery-item').getAttribute('data-region');
+        const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
+        
+        if (subGallery) {
+            subGallery.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     });
+});
 
     // Protection measures
     document.addEventListener('contextmenu', function(e) {
