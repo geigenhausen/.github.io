@@ -185,7 +185,7 @@
       // Check for saved theme preference
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
+          document.body.classList.add('dark-mode'); // Fixed: changed body to document.body
       } else {
           // Check system preference
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -203,15 +203,16 @@
           if (!localStorage.getItem('theme')) { // Only if user hasn't manually set theme
               setTheme(e.matches);
           }
+      }); // Fixed: Added missing closing parenthesis
 
       // Language selector functionality
       const languageSelect = document.getElementById('language-select');
       languageSelect.addEventListener('change', (e) => {
-        const selectedLanguage = e.target.value;
-        // Add your language switching logic here
-        console.log('Language changed to:', selectedLanguage);
+          const selectedLanguage = e.target.value;
+          // Add your language switching logic here
+          console.log('Language changed to:', selectedLanguage);
       });
     });
-  </script>
+</script>
 </body>
 </html>
