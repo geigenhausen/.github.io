@@ -212,26 +212,45 @@
         </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Lightbox
-            const lightbox = GLightbox({
-                touchNavigation: true,
-                loop: true,
-                closeButton: true,
-                zoomable: true
-            });
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Create copyright notice modal
+    const modal = document.createElement('div');
+    modal.className = 'copyright-modal';
+    modal.innerHTML = `
+        <div class="copyright-content">
+            <h3>© Copyright Notice</h3>
+            <p>These images are protected by copyright law.</p>
+            <p>Unauthorized use, reproduction, or distribution is prohibited.</p>
+            <p>For licensing or usage inquiries, please contact:</p>
+            <p>contact@leophotos.com</p>
+            <button class="modal-close">Close</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
 
-         document.addEventListener('DOMContentLoaded', function() {
-         // Disable right click
-         document.addEventListener('contextmenu', function(e) {
-         e.preventDefault();
-         showCopyrightNotice();
-         });
+    // Copyright protection function
+    function showCopyrightNotice() {
+        modal.classList.add('active');
+        setTimeout(() => modal.classList.remove('active'), 3000);
+    }
 
-    // Disable keyboard shortcuts
+    // Initialize Lightbox
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        loop: true,
+        closeButton: true,
+        zoomable: true
+    });
+
+    // Protection measures
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        showCopyrightNotice();
+    });
+
     document.addEventListener('keydown', function(e) {
         // Prevent PrintScreen
         if (e.key === 'PrintScreen') {
@@ -254,38 +273,17 @@
         }
     });
 
-// Disable drag and drop
+    // Disable drag and drop
     document.addEventListener('dragstart', function(e) {
         e.preventDefault();
     });
 
-    // Create copyright notice modal
-    const modal = document.createElement('div');
-    modal.className = 'copyright-modal';
-    modal.innerHTML = `
-        <div class="copyright-content">
-            <h3>© Copyright Notice</h3>
-            <p>These images are protected by copyright law.</p>
-            <p>Unauthorized use, reproduction, or distribution is prohibited.</p>
-            <p>For licensing or usage inquiries, please contact:</p>
-            <p>contact@leophotos.com</p>
-            <button class="modal-close">Close</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    // Add modal close functionality
+    // Modal close functionality
     modal.querySelector('.modal-close').addEventListener('click', function() {
         modal.classList.remove('active');
     });
 
-    // Function to show copyright notice
-    function showCopyrightNotice() {
-        modal.classList.add('active');
-        setTimeout(() => modal.classList.remove('active'), 3000);
-    }
-
-    // Add blur protection when window loses focus
+    // Blur protection
     let blurTimeout;
     window.addEventListener('blur', function() {
         blurTimeout = setTimeout(() => {
@@ -297,153 +295,143 @@
         clearTimeout(blurTimeout);
         document.body.classList.remove('page-blurred');
     });
-});
-             
-            // Image loading handler
-document.querySelectorAll('.gallery-image-wrapper img').forEach(img => {
-    if (img.complete) {
-        img.classList.add('loaded');
-    } else {
-        img.addEventListener('load', function() {
-            this.classList.add('loaded');
+
+    // Image loading handler
+    document.querySelectorAll('.gallery-image-wrapper img').forEach(img => {
+        if (img.complete) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+            });
+        }
+
+        img.addEventListener('error', function() {
+            console.error('Failed to load image:', this.src);
+            this.parentElement.style.backgroundColor = '#ddd';
+            this.style.display = 'none';
+            this.parentElement.innerHTML += `
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+                            display: flex; align-items: center; justify-content: center; 
+                            padding: 1rem; text-align: center;">
+                    Image failed to load
+                </div>`;
         });
+    });
+
+    // Gallery and Sub-gallery functionality
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryItems.forEach(item => {
+        const itemInfo = item.querySelector('.gallery-item-info');
+        
+        // Add click event to info section for sub-gallery
+        itemInfo.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const region = item.closest('.gallery-item').getAttribute('data-region');
+            const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
+            
+            if (subGallery) {
+                subGallery.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close sub-gallery functionality
+    function closeSubGallery() {
+        const activeSubGallery = document.querySelector('.sub-gallery.active');
+        if (activeSubGallery) {
+            activeSubGallery.classList.remove('active');
+            document.body.style.overflow = '';
+        }
     }
 
-    img.addEventListener('error', function() {
-        console.error('Failed to load image:', this.src);
-        this.parentElement.style.backgroundColor = '#ddd';
-        this.style.display = 'none';
-        this.parentElement.innerHTML += `
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-                        display: flex; align-items: center; justify-content: center; 
-                        padding: 1rem; text-align: center;">
-                Image failed to load
-            </div>`;
+    // Close button handlers
+    document.querySelectorAll('.sub-gallery-close').forEach(button => {
+        button.addEventListener('click', closeSubGallery);
+    });
+
+    // Click outside to close
+    document.querySelectorAll('.sub-gallery').forEach(gallery => {
+        gallery.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSubGallery();
+            }
+        });
+    });
+
+    // ESC key handler
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeSubGallery();
+        }
+    });
+
+    // Visitor counter functionality
+    const visitorCount = document.getElementById('visitor-count');
+    
+    function getVisitorCount() {
+        let count = localStorage.getItem('visitorCount');
+        return parseInt(count || '0');
+    }
+
+    function updateVisitorCount() {
+        let count = getVisitorCount();
+        count++;
+        localStorage.setItem('visitorCount', count);
+        visitorCount.textContent = count.toLocaleString();
+    }
+
+    updateVisitorCount();
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    function setTheme(isDark) {
+        document.body.classList.toggle('dark-mode', isDark);
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // Check saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        setTheme(true);
+    } else if (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme(true);
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const isDark = !document.body.classList.contains('dark-mode');
+        setTheme(isDark);
+    });
+
+    // Background image loading with fallback
+    const backgroundImage = new Image();
+    const backgroundElement = document.getElementById('background-image');
+    
+    backgroundImage.onload = function() {
+        backgroundElement.style.backgroundImage = `url('${this.src}')`;
+        backgroundElement.style.opacity = '1';
+    };
+
+    backgroundImage.onerror = function() {
+        console.error('Failed to load background image');
+        backgroundElement.style.backgroundColor = '#1a1a1a';
+    };
+
+    // Load background image
+    backgroundImage.src = 'wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
+
+    // Prevent details from closing when clicking gallery items
+    document.querySelectorAll('.gallery').forEach(gallery => {
+        gallery.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
     });
 });
-
-            // Gallery and Sub-gallery functionality
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            
-            galleryItems.forEach(item => {
-                const itemInfo = item.querySelector('.gallery-item-info');
-                
-                // Add click event to info section for sub-gallery
-                itemInfo.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const region = item.closest('.gallery-item').getAttribute('data-region');
-                    const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
-                    
-                    if (subGallery) {
-                        subGallery.classList.add('active');
-                        document.body.style.overflow = 'hidden';
-                    }
-                });
-            });
-
-            // Close sub-gallery functionality
-            function closeSubGallery() {
-                const activeSubGallery = document.querySelector('.sub-gallery.active');
-                if (activeSubGallery) {
-                    activeSubGallery.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            // Close button handlers
-            document.querySelectorAll('.sub-gallery-close').forEach(button => {
-                button.addEventListener('click', closeSubGallery);
-            });
-
-            // Click outside to close
-            document.querySelectorAll('.sub-gallery').forEach(gallery => {
-                gallery.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        closeSubGallery();
-                    }
-                });
-            });
-
-            // ESC key handler
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeSubGallery();
-                }
-            });
-
-            // Visitor counter functionality
-            const visitorCount = document.getElementById('visitor-count');
-            
-            function getVisitorCount() {
-                let count = localStorage.getItem('visitorCount');
-                return parseInt(count || '0');
-            }
-
-            function updateVisitorCount() {
-                let count = getVisitorCount();
-                count++;
-                localStorage.setItem('visitorCount', count);
-                visitorCount.textContent = count.toLocaleString();
-            }
-
-            updateVisitorCount();
-
-            // Theme toggle functionality
-            const themeToggle = document.getElementById('theme-toggle');
-            
-            function setTheme(isDark) {
-                document.body.classList.toggle('dark-mode', isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            }
-
-            // Check saved theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                setTheme(true);
-            } else if (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                setTheme(true);
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = !document.body.classList.contains('dark-mode');
-                setTheme(isDark);
-            });
-
-            // Background image loading with fallback
-            const backgroundImage = new Image();
-            const backgroundElement = document.getElementById('background-image');
-            
-            backgroundImage.onload = function() {
-                backgroundElement.style.backgroundImage = `url('${this.src}')`;
-                backgroundElement.style.opacity = '1';
-            };
-
-            backgroundImage.onerror = function() {
-                console.error('Failed to load background image');
-                backgroundElement.style.backgroundColor = '#1a1a1a';
-            };
-
-            // Load background image
-            backgroundImage.src = 'wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
-
-            // Image loading debug
-            document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('error', function() {
-                    console.error('Failed to load image:', this.src);
-                });
-                img.addEventListener('load', function() {
-                    console.log('Successfully loaded image:', this.src);
-                });
-            });
-
-            // Prevent details from closing when clicking gallery items
-            document.querySelectorAll('.gallery').forEach(gallery => {
-                gallery.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            });
-        });
-    </script>
-</body>
+</script>
+    
+  </body>
 </html>
