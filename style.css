@@ -388,7 +388,7 @@ details[open] summary::before {
    position: relative;
     border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 16/9;
+    aspect-ratio: 3/2;
     background-color: #f0f0f0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     user-select: none;
