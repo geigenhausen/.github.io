@@ -1,225 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Explore worldwide travel photography featuring beautiful locations from Japan, France, and more" />
-    <meta name="theme-color" content="#a8d8ff" />
-    
-    <title>Leo Photos Worldwide | Travel Photography</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="style.css" />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore worldwide travel photography featuring beautiful locations from Japan, France, and more" />
+  <meta name="theme-color" content="#a8d8ff" />
+  <title>Leo Photos Worldwide | Travel Photography</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-content">
-            <h1 class="site-title">
-                <span class="title-main">Travel Photography</span>
-                <span class="title-sub">Through My Lens</span>
-            </h1>
-            
-            <p class="site-description">Capturing moments across borders</p>
+  <header class="site-header">
+    <div class="header-content">
+      <h1 class="site-title">
+        <span class="title-main">Travel Photography</span>
+        <span class="title-sub">Through My Lens</span>
+      </h1>
+      <p class="site-description">Capturing moments across borders</p>
 
-            <nav class="header-controls">
-                <div class="control-group">
-                    <label for="language-select" class="visually-hidden">Select Language</label>
-                    <div class="select-wrapper">
-                        <select id="language-select" class="language-select">
-                            <option value="en">🇬🇧 English</option>
-                            <option value="ja">🇯🇵 日本語</option>
-                            <option value="fr">🇫🇷 Français</option>
-                        </select>
-                    </div>
+      <nav class="header-controls">
+        <div class="control-group">
+          <label for="language-select" class="visually-hidden">Select Language</label>
+          <div class="select-wrapper">
+            <select id="language-select" class="language-select">
+              <option value="en">🇬🇧 English</option>
+              <option value="ja">🇯🇵 日本語</option>
+              <option value="fr">🇫🇷 Français</option>
+            </select>
+          </div>
 
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-                        <span class="icon-light">☀️</span>
-                        <span class="icon-dark">🌙</span>
-                    </button>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="icon-light">☀️</span>
+            <span class="icon-dark">🌙</span>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="nature">Nature</button>
+      <button class="filter-btn" data-filter="urban">Urban</button>
+      <button class="filter-btn" data-filter="culture">Culture</button>
+    </div>
+
+    <div class="countries-grid">
+      <!-- JAPAN -->
+      <section class="country-card" data-country="japan">
+        <details open>
+          <summary class="country-header">
+            <span class="country-flag">🇯🇵</span>
+            <span class="country-name">Japan</span>
+            <span class="photo-count">24 photos</span>
+          </summary>
+          <div class="gallery-preview">
+            <div class="gallery">
+              <article class="gallery-item" data-category="culture">
+                <img src="path/to/tokyo.jpg" alt="Tokyo Cityscape at Night" loading="lazy">
+                <div class="gallery-item-info">
+                  <h3>Tokyo 東京</h3>
+                  <p>Urban nightlife and modern architecture</p>
                 </div>
-            </nav>
-        </div>
-    </header>
+              </article>
 
-    <main class="site-main">
-        <div class="gallery-filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="nature">Nature</button>
-            <button class="filter-btn" data-filter="urban">Urban</button>
-            <button class="filter-btn" data-filter="culture">Culture</button>
-        </div>
+              <article class="gallery-item" data-category="nature">
+                <img src="images/DSCF1731.jpeg" alt="Matsuyama Castle in Ehime" loading="lazy">
+                <div class="gallery-item-info">
+                  <h3>Ehime 愛媛</h3>
+                  <p>Historical castle and cherry blossom</p>
+                </div>
+              </article>
 
-        <div class="countries-grid">
-            <section class="country-card" data-country="japan">
-                <details open>
-                    <summary class="country-header">
-                        <span class="country-flag">🇯🇵</span>
-                        <span class="country-name">Japan</span>
-                        <span class="photo-count">24 photos</span>
-                    </summary>
-                    
-                    <div class="gallery-preview">
-                        <div class="gallery">
-                            <article class="gallery-item" data-category="culture">
-                                <img src="path/to/tokyo.jpg" alt="Tokyo Cityscape at Night" loading="lazy">
-                                <div class="gallery-item-info">
-                                    <h3>Tokyo 東京</h3>
-                                    <p>Urban nightlife and modern architecture</p>
-                                </div>
-                            </article>
-                            
-                            <article class="gallery-item" data-category="nature">
-                                <img src="images/DSCF1731.jpeg" alt="Matsuyama Castle in Ehime" loading="lazy">
-                                <div class="gallery-item-info">
-                                    <h3>Ehime 愛媛</h3>
-                                    <p>Historical castle and cherry blossom</p>
-                                </div>
-                            </article>
-                            
-                            <article class="gallery-item" data-category="nature">
-                                <img src="path/to/sakura.jpg" alt="Cherry Blossoms in Full Bloom" loading="lazy">
-                                <div class="gallery-item-info">
-                                    <h3>Cherry Blossom 🌸</h3>
-                                    <p>Spring beauty across Japan</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </details>
-            </section>
-
-            <section class="country-card" data-country="france">
-                <details>
-                    <summary class="country-header">
-                        <span class="country-flag">🇫🇷</span>
-                        <span class="country-name">France</span>
-                        <span class="photo-count">18 photos</span>
-                    </summary>
-                    
-                    <div class="gallery-preview">
-                        <div class="gallery">
-                            <article class="gallery-item" data-category="urban">
-                                <img src="path/to/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy">
-                                <div class="gallery-item-info">
-                                    <h3>Paris</h3>
-                                    <p>City of Light and Romance</p>
-                                </div>
-                            </article>
-                            
-                            <article class="gallery-item" data-category="culture">
-                                <img src="path/to/lyon.jpg" alt="Historic Lyon Streets" loading="lazy">
-                                <div class="gallery-item-info">
-                                    <h3>Lyon</h3>
-                                    <p>Culinary capital and historic architecture</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </details>
-            </section>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <p class="copyright">© 2025 Leo Photos Worldwide</p>
-                <p class="footer-tagline">Capturing the world's beauty, one frame at a time</p>
+              <article class="gallery-item" data-category="nature">
+                <img src="path/to/sakura.jpg" alt="Cherry Blossoms in Full Bloom" loading="lazy">
+                <div class="gallery-item-info">
+                  <h3>Cherry Blossom 🌸</h3>
+                  <p>Spring beauty across Japan</p>
+                </div>
+              </article>
             </div>
-            
-            <nav class="footer-nav">
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
-                <a href="/privacy">Privacy</a>
-            </nav>
-        </div>
-    </footer>
+          </div>
+        </details>
+      </section>
 
-    <script type="module">
-        // Theme handling
-        const themeToggle = document.getElementById('theme-toggle');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        function updateTheme(isDark) {
-            document.documentElement.classList.toggle('dark-mode', isDark);
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      <!-- FRANCE -->
+      <section class="country-card" data-country="france">
+        <details>
+          <summary class="country-header">
+            <span class="country-flag">🇫🇷</span>
+            <span class="country-name">France</span>
+            <span class="photo-count">18 photos</span>
+          </summary>
+          <div class="gallery-preview">
+            <div class="gallery">
+              <article class="gallery-item" data-category="urban">
+                <img src="path/to/paris.jpg" alt="Eiffel Tower at Sunset" loading="lazy">
+                <div class="gallery-item-info">
+                  <h3>Paris</h3>
+                  <p>City of Light and Romance</p>
+                </div>
+              </article>
+
+              <article class="gallery-item" data-category="culture">
+                <img src="path/to/lyon.jpg" alt="Historic Lyon Streets" loading="lazy">
+                <div class="gallery-item-info">
+                  <h3>Lyon</h3>
+                  <p>Culinary capital and historic architecture</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </details>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <p class="copyright">© 2025 Leo Photos Worldwide</p>
+        <p class="footer-tagline">Capturing the world's beauty, one frame at a time</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script type="module">
+    // Theme handling
+    const themeToggle = document.getElementById('theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    function updateTheme(isDark) {
+      document.documentElement.classList.toggle('dark-mode', isDark);
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      updateTheme(savedTheme === 'dark');
+    } else {
+      updateTheme(prefersDark.matches);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      updateTheme(!document.documentElement.classList.contains('dark-mode'));
+    });
+
+    prefersDark.addEventListener('change', (e) => {
+      updateTheme(e.matches);
+    });
+
+    // Gallery filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Language select
+    const languageSelect = document.getElementById('language-select');
+    languageSelect.addEventListener('change', (e) => {
+      const lang = e.target.value;
+      document.documentElement.lang = lang;
+    });
+
+    // Lazy load + animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
+      });
+    }, observerOptions);
 
-        // Initialize theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            updateTheme(savedTheme === 'dark');
-        } else {
-            updateTheme(prefersDark.matches);
-        }
-
-        themeToggle.addEventListener('click', () => {
-            updateTheme(!document.documentElement.classList.contains('dark-mode'));
-        });
-
-        prefersDark.addEventListener('change', (e) => {
-            updateTheme(e.matches);
-        });
-
-        // Gallery filtering
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.dataset.filter;
-                
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                galleryItems.forEach(item => {
-                    if (filter === 'all' || item.dataset.category === filter) {
-                        item.style.display = '';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Language handling
-        const languageSelect = document.getElementById('language-select');
-        
-        languageSelect.addEventListener('change', (e) => {
-            const lang = e.target.value;
-            document.documentElement.lang = lang;
-            // Here you would typically handle the language change
-            // through your preferred i18n solution
-        });
-
-        // Lazy loading and animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '50px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            observer.observe(item);
-        });
-    </script>
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      observer.observe(item);
+    });
+  </script>
 </body>
 </html>
