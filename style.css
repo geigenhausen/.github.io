@@ -12,15 +12,17 @@
     z-index: -1;
     top: 0;
     left: 0;
+  background-color: #f4f8fb;
 }
 
 body {
   font-family: 'Outfit', sans-serif;
   color: #333;
-  background-color: #f4f8fb;
+  background: transparent;
   line-height: 1.6;
   padding: 0 1rem;
   min-height: 100vh;
+  position: relative;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -34,6 +36,8 @@ img {
 
 /* === Header === */
 .site-header {
+  position: relative;
+  z-index: 1;
   padding: 2rem 0;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.85);
@@ -110,6 +114,8 @@ img {
 
 /* === Countries & Gallery === */
 .countries-grid {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -161,6 +167,8 @@ img {
 
 /* === Footer === */
 .site-footer {
+  position: relative;
+  z-index: 1;
   text-align: center;
   margin-top: 3rem;
   padding: 2rem 1rem;
