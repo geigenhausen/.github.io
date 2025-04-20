@@ -41,6 +41,13 @@
                     </h1>
                     <p class="site-description">🇫🇷 living in 🇯🇵 showcasing worldwide pictures.</p>
                 </div>
+             <div id="modal" class="copyright-modal">
+    <div class="modal-content">
+        <button class="modal-close">×</button>
+        <h3>Copyright Notice</h3>
+        <p>© 2025 Leo Photos. All rights reserved. Images on this site are protected by copyright law.</p>
+    </div>
+</div>
             </div>
         </header>
 
@@ -226,6 +233,7 @@
             const galleryItems = document.querySelectorAll('.gallery-item');
             const themeToggle = document.getElementById('theme-toggle');
             const visitorCount = document.getElementById('visitor-count');
+            const modal = document.getElementById('modal');
             const backgroundElement = document.getElementById('background-image');
 
             // Initialize Lightbox
@@ -402,13 +410,6 @@
             if (savedTheme === 'dark' || 
                 (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 setTheme(true);
-            }
-
-            // Check saved theme
-           const savedTheme = localStorage.getItem('theme');
-           if (savedTheme === 'dark' || 
-               (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-               setTheme(true);
             }
 
             themeToggle.addEventListener('click', () => {
