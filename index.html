@@ -178,106 +178,99 @@
 
   <!-- Scripts - Place these right before closing body tag -->
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+    // Initialize all functionality when DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Lightbox
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            closeButton: true,
+            zoomable: true
+        });
+
+        // Function to close sub-gallery
+        function closeSubGallery() {
+            const activeSubGallery = document.querySelector('.sub-gallery.active');
+            if (activeSubGallery) {
+                activeSubGallery.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Listen for escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSubGallery();
+            }
+        });
+
+        // Add click handler to close buttons
+        const closeButtons = document.querySelectorAll('.sub-gallery-close');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', closeSubGallery);
+        });
+
+        // Sub-gallery functionality
+        document.querySelectorAll('.gallery-item-info h3').forEach(title => {
+            title.style.cursor = 'pointer';
+            title.addEventListener('click', (e) => {
+                const galleryName = e.target.textContent.split(' ')[0].toLowerCase();
+                const subGallery = document.getElementById(`${galleryName}-gallery`);
+                if (subGallery) {
+                    subGallery.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Visitor counter functionality
+        const visitorCount = document.getElementById('visitor-count');
+        
+        function getVisitorCount() {
+            let count = localStorage.getItem('visitorCount');
+            return parseInt(count || '0');
+        }
+
+        function updateVisitorCount() {
+            let count = getVisitorCount();
+            count++;
+            localStorage.setItem('visitorCount', count);
+            visitorCount.textContent = count.toLocaleString();
+        }
+
+        // Update count on page load
+        updateVisitorCount();
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        function setTheme(isDark) {
+            document.body.classList.toggle('dark-mode', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            setTheme(true);
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.body.classList.contains('dark-mode');
+            setTheme(isDark);
+        });
+
+        // Background image loading
+        const backgroundImage = new Image();
+        backgroundImage.onload = function() {
+            document.getElementById('background-image').style.backgroundImage = `url('${this.src}')`;
+        };
+        backgroundImage.src = '/wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
+    });
+</script>
   
-  <script>
-    // Wait for all resources to load
-    window.addEventListener('load', function() {
-      // Initialize Lightbox
-      const lightbox = GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        closeButton: true,
-        zoomable: true
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-    // Function to close sub-gallery
-    function closeSubGallery() {
-        const activeSubGallery = document.querySelector('.sub-gallery.active');
-        if (activeSubGallery) {
-            activeSubGallery.classList.remove('active');
-        }
-    }
-
-    // Listen for escape key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            closeSubGallery();
-        }
-    });
-
-    // Add click handler to close buttons
-    const closeButtons = document.querySelectorAll('.sub-gallery-close');
-    closeButtons.forEach(button => {
-        button.addEventListener('click', closeSubGallery);
-    });
-});
-
-       // Sub-gallery functionality
-      document.querySelectorAll('.gallery-item-info h3').forEach(title => {
-        title.style.cursor = 'pointer'; // Make it clear it's clickable
-        title.addEventListener('click', (e) => {
-          const galleryName = e.target.textContent.split(' ')[0].toLowerCase();
-          const subGallery = document.getElementById(`${galleryName}-gallery`);
-          if (subGallery) {
-            subGallery.classList.add('active');
-            document.body.style.overflow = 'hidden';
-          }
-        });
-      });
-
-      document.querySelectorAll('.sub-gallery-close').forEach(button => {
-        button.addEventListener('click', () => {
-          button.closest('.sub-gallery').classList.remove('active');
-          document.body.style.overflow = '';
-        });
-      });
-
-      // Visitor counter functionality
-      const visitorCount = document.getElementById('visitor-count');
-      
-      function getVisitorCount() {
-        let count = localStorage.getItem('visitorCount');
-        if (!count) {
-          count = 0;
-        }
-        return parseInt(count);
-      }
-
-      function updateVisitorCount() {
-        let count = getVisitorCount();
-        count++;
-        localStorage.setItem('visitorCount', count);
-        visitorCount.textContent = count.toLocaleString();
-      }
-
-      // Update count on page load
-      updateVisitorCount();
-
-      // Theme toggle functionality
-      const themeToggle = document.getElementById('theme-toggle');
-      
-      // Function to set theme
-      function setTheme(isDark) {
-        document.body.classList.toggle('dark-mode', isDark);
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      }
-
-      // Check for saved theme preference
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        setTheme(true);
-      }
-
-      // Toggle theme on button click
-      themeToggle.addEventListener('click', () => {
-        const isDark = !document.body.classList.contains('dark-mode');
-        setTheme(isDark);
-      });
-    });
-  </script>
-</body>
-</html>
 </body>
 </html>
