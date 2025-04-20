@@ -80,16 +80,18 @@ select:focus {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(204, 204, 204, 0.3);
-    width: 100vw;
-    left: 0;
-    right: 0;
+    width: 100%;
     margin: 0;
+    left: 0;
+    transform: translateX(0); /* Ensure no horizontal shift */
 }
 
 .header-content {
-    max-width: 1200px;
+   max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .header-text {
@@ -157,9 +159,9 @@ select:focus {
 /* === Main Content === */
 .site-main {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 0 auto;
     padding: 2rem;
-    min-height: calc(100vh - 200px); /* Account for header and footer */
+    min-height: calc(100vh - 200px);
 }
 
 /* === Countries & Gallery === */
@@ -371,18 +373,18 @@ details[open] summary::before {
     backdrop-filter: blur(8px);
     border-top: 1px solid rgba(204, 204, 204, 0.3);
     padding: 1.5rem 0;
-    width: 100vw;
-    left: 0;
-    right: 0;
+    width: 100%;
     margin: 0;
+    left: 0;
+    transform: translateX(0); /* Ensure no horizontal shift */
 }
 
 .footer-content {
-    max-width: 1200px;
+   max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
-    display: flex;
-    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .footer-nav {
@@ -530,6 +532,11 @@ body.dark-mode .nav-separator {
         text-align: center;
     }
 
+    .header-content,
+    .footer-content {
+        padding: 0 1rem;
+    }
+
     .site-title {
         font-size: 2rem;
     }
@@ -619,6 +626,11 @@ body.dark-mode .nav-separator {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* === Reduced Motion === */
