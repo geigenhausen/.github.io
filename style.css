@@ -481,6 +481,15 @@ body.dark-mode .sub-gallery-close {
     color: #ffffff;
 }
 
+body.dark-mode .sub-gallery-close {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+body.dark-mode .sub-gallery-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
 body.dark-mode .site-footer {
     background-color: rgba(30, 30, 30, 0.85);
     color: #dddddd;
