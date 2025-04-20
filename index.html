@@ -23,12 +23,24 @@
   <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" />
 
   <!-- Animated Background -->
-  <style>
-    body {
-      background: url('https://loading.io/background/m-sea-of-clouds') no-repeat center center fixed;
-      background-size: cover;
-    }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+  <script>
+  VANTA.WAVES({
+    el: "#vanta-bg",
+    mouseControls: true,
+    touchControls: true,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    color: 0xa8d8ff, // sky blue
+    shininess: 50.00,
+    waveHeight: 20.00,
+    waveSpeed: 1.00,
+    zoom: 0.85
+  });
+</script>
 </head>
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
@@ -41,10 +53,11 @@
   });
 </script>
 <body>
+  <div id="vanta-bg"></div>
   <header class="site-header">
     <div class="header-content">
       <h1 class="site-title">
-        <span class="title-main">Travel Photography |</span>
+        <span class="title-main">Travel Photography</span>
         <span class="title-sub">Fujifilm x100VI 📷</span>
       </h1>
       <p class="site-description">🇫🇷 living in 🇯🇵 showcasing worldwide pictures.</p>
