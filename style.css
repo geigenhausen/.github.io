@@ -351,8 +351,8 @@ details[open] summary::before {
 
 .gallery {
    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
     padding: 0.5rem;
 }
 
@@ -824,6 +824,18 @@ body.dark-mode .modal-close:hover {
     .nav-separator {
         display: none;
     }
+}
+
+@media (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
