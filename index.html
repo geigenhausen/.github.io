@@ -228,21 +228,6 @@
             const visitorCount = document.getElementById('visitor-count');
             const backgroundElement = document.getElementById('background-image');
 
-            // Create copyright notice modal
-            const modal = document.createElement('div');
-            modal.className = 'copyright-modal';
-            modal.innerHTML = `
-                <div class="copyright-content">
-                    <h3>© Copyright Notice</h3>
-                    <p>These images are protected by copyright law.</p>
-                    <p>Unauthorized use, reproduction, or distribution is prohibited.</p>
-                    <p>For licensing or usage inquiries, please contact:</p>
-                    <p>batchat24@gmail.com</p>
-                    <button class="modal-close">Close</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-
             // Initialize Lightbox
             const lightbox = GLightbox({
                 touchNavigation: true,
