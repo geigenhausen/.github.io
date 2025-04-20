@@ -243,6 +243,15 @@ details[open] summary::before {
     padding: 0.5rem;
 }
 
+.gallery-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 16/9;
+}
+
 .gallery-item {
    position: relative;
     border-radius: 12px;
@@ -332,9 +341,8 @@ details[open] summary::before {
 }
 
 .sub-gallery.active {
-    display: block;
+   display: block;
     opacity: 1;
-    animation: fadeIn 0.3s ease-out;
 }
 
 .sub-gallery-header {
