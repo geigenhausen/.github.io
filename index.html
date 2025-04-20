@@ -204,6 +204,29 @@
                 zoomable: true
             });
 
+            // Image loading handler
+document.querySelectorAll('.gallery-image-wrapper img').forEach(img => {
+    if (img.complete) {
+        img.classList.add('loaded');
+    } else {
+        img.addEventListener('load', function() {
+            this.classList.add('loaded');
+        });
+    }
+
+    img.addEventListener('error', function() {
+        console.error('Failed to load image:', this.src);
+        this.parentElement.style.backgroundColor = '#ddd';
+        this.style.display = 'none';
+        this.parentElement.innerHTML += `
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+                        display: flex; align-items: center; justify-content: center; 
+                        padding: 1rem; text-align: center;">
+                Image failed to load
+            </div>`;
+    });
+});
+
             // Gallery and Sub-gallery functionality
             const galleryItems = document.querySelectorAll('.gallery-item');
             
