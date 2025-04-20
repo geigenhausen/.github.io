@@ -80,10 +80,9 @@ select:focus {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(204, 204, 204, 0.3);
-    width: 100%;
-    margin: 0;
-    left: 0;
-    transform: translateX(0); /* Ensure no horizontal shift */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
 }
 
 .header-content {
@@ -373,10 +372,9 @@ details[open] summary::before {
     backdrop-filter: blur(8px);
     border-top: 1px solid rgba(204, 204, 204, 0.3);
     padding: 1.5rem 0;
-    width: 100%;
-    margin: 0;
-    left: 0;
-    transform: translateX(0); /* Ensure no horizontal shift */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
 }
 
 .footer-content {
