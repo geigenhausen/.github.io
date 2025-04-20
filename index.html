@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Explore worldwide travel photography featuring beautiful locations from Japan, France, and more" />
   <meta name="theme-color" content="#a8d8ff" />
-  <title>Leo Photos Worldwide | Travel Photography</title>
+  <title>Leo Photos | Travel & Worldwide Photography</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,7 +23,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
 <body>
-  <div id="vanta-bg"></div>
+  <div id="background-image"></div>
   
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
     <span class="icon-light">☀️</span>
@@ -33,7 +33,7 @@
   <header class="site-header">
     <div class="header-content">
       <h1 class="site-title">
-        <span class="title-main">Travel Photography</span>
+        <span class="title-main">Leo Photos</span>
         <span class="title-sub">Fujifilm x100VI 📷</span>
       </h1>
       <p class="site-description">🇫🇷 living in 🇯🇵 showcasing worldwide pictures.</p>
@@ -124,9 +124,54 @@
           </div>
         </details>
       </section>
-    </div>
-  </main>
+      <div class="sub-gallery" id="tokyo-gallery">
+  <div class="sub-gallery-header">
+    <h2>Tokyo 東京</h2>
+    <button class="sub-gallery-close">×</button>
+  </div>
+  <div class="sub-gallery-grid">
+    <!-- Add your Tokyo images here -->
+    <article class="gallery-item">
+      <a href="path/to/tokyo1.jpg" class="glightbox" data-gallery="tokyo">
+        <img src="path/to/tokyo1.jpg" alt="Tokyo Scene 1" loading="lazy" />
+      </a>
+      <div class="gallery-item-info">
+        <h3>Shibuya</h3>
+        <p>The famous crossing at night</p>
+      </div>
+    </article>
+    <!-- Add more images as needed -->
+  </div>
+</div>
 
+<div class="sub-gallery" id="ehime-gallery">
+  <div class="sub-gallery-header">
+    <h2>Ehime 愛媛</h2>
+    <button class="sub-gallery-close">×</button>
+  </div>
+  <div class="sub-gallery-grid">
+    <!-- Add your Ehime images here -->
+    <article class="gallery-item">
+      <a href="path/to/ehime1.jpg" class="glightbox" data-gallery="ehime">
+        <img src="path/to/ehime1.jpg" alt="Ehime Scene 1" loading="lazy" />
+      </a>
+      <div class="gallery-item-info">
+        <h3>Matsuyama Castle</h3>
+        <p>Historic castle view</p>
+      </div>
+    </article>
+    <!-- Add more images as needed -->
+  </div>
+</div>
+    </div>   
+  </main>
+  
+    <!-- Add visitor counter -->
+<div class="visitor-counter">
+  <span>Visitors: </span>
+  <span id="visitor-count">Loading...</span>
+</div>
+  
   <footer class="site-footer">
     <div class="footer-content">
       <div class="footer-info">
@@ -141,30 +186,11 @@
   </footer>
 
   <!-- Scripts - Place these right before closing body tag -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
   
   <script>
     // Wait for all resources to load
     window.addEventListener('load', function() {
-      // Initialize VANTA
-      VANTA.WAVES({
-        el: "#vanta-bg",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0xa8d8ff,
-        shininess: 50.00,
-        waveHeight: 20.00,
-        waveSpeed: 1.00,
-        zoom: 0.85
-      });
-
       // Initialize Lightbox
       const lightbox = GLightbox({
         selector: '.glightbox',
@@ -173,6 +199,47 @@
         closeButton: true,
         zoomable: true
       });
+
+       // Sub-gallery functionality
+      document.querySelectorAll('.gallery-item-info h3').forEach(title => {
+        title.style.cursor = 'pointer'; // Make it clear it's clickable
+        title.addEventListener('click', (e) => {
+          const galleryName = e.target.textContent.split(' ')[0].toLowerCase();
+          const subGallery = document.getElementById(`${galleryName}-gallery`);
+          if (subGallery) {
+            subGallery.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      document.querySelectorAll('.sub-gallery-close').forEach(button => {
+        button.addEventListener('click', () => {
+          button.closest('.sub-gallery').classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // Visitor counter functionality
+      const visitorCount = document.getElementById('visitor-count');
+      
+      function getVisitorCount() {
+        let count = localStorage.getItem('visitorCount');
+        if (!count) {
+          count = 0;
+        }
+        return parseInt(count);
+      }
+
+      function updateVisitorCount() {
+        let count = getVisitorCount();
+        count++;
+        localStorage.setItem('visitorCount', count);
+        visitorCount.textContent = count.toLocaleString();
+      }
+
+      // Update count on page load
+      updateVisitorCount();
 
       // Theme toggle functionality
       const themeToggle = document.getElementById('theme-toggle');
