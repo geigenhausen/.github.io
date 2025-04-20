@@ -5,7 +5,9 @@
     box-sizing: border-box;
 }
 
-html {
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
@@ -17,7 +19,6 @@ body {
     min-height: 100vh;
     position: relative;
     transition: background-color 0.3s ease, color 0.3s ease;
-    overflow-x: hidden;
 }
 
 img {
@@ -30,13 +31,6 @@ img {
 .page-wrapper {
     position: relative;
     overflow: hidden;
-    width: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
     width: 100%;
 }
 
@@ -103,7 +97,6 @@ select:focus {
     margin: 0 auto;
     padding: 0 2rem;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .header-text {
@@ -176,179 +169,7 @@ select:focus {
     min-height: calc(100vh - 200px);
 }
 
-/* === Image Protection Styles === */
-.gallery-item img,
-.sub-gallery-item img {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-}
-
-/* === Copyright Modal === */
-.copyright-modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.9);
-    padding: 2rem;
-    border-radius: 12px;
-    color: white;
-    z-index: 9999;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.copyright-modal.active {
-    display: block;
-    animation: modalFadeIn 0.3s ease;
-}
-
-.copyright-content {
-    max-width: 400px;
-}
-
-.copyright-content h3 {
-    margin: 0 0 1rem;
-    color: #a8d8ff;
-}
-
-.copyright-content p {
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
-}
-
-.modal-close {
-    margin-top: 1rem;
-    padding: 0.5rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    background: #a8d8ff;
-    color: #000;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.modal-close:hover {
-    background: #7ac0ff;
-}
-
-/* === Blur Protection === */
-.page-blurred .gallery-item img,
-.page-blurred .sub-gallery-item img {
-    filter: blur(20px);
-    transition: filter 0.3s ease;
-}
-
-/* === Watermark === */
-.gallery-image-wrapper::before,
-.sub-gallery-item::before {
-    content: "© Leo Photos";
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-    z-index: 1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-}
-
-/* === Additional Animations === */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-/* === Hover Watermark === */
-.gallery-image-wrapper:hover::after,
-.sub-gallery-item:hover::after {
-   content: "© Leo Photos";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    opacity: 0.8;
-    pointer-events: none;
-}
-
-/* === Countries & Gallery === */
-.countries-grid {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.country-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    padding: 1rem;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.country-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.country-header {
-    font-size: 1.5rem;
-    font-weight: 600;
-    padding: 0.5rem 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #2b2d42;
-}
-
-details summary {
-    list-style: none;
-    transition: color 0.3s ease;
-}
-
-details summary::-webkit-details-marker {
-    display: none;
-}
-
-details summary::before {
-    content: '›';
-    margin-right: 0.5rem;
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-details[open] summary::before {
-    transform: rotate(90deg);
-}
-
-.gallery-preview {
-    padding: 1rem 0;
-}
-
+/* === Gallery Layout === */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -356,8 +177,20 @@ details[open] summary::before {
     padding: 0.5rem;
 }
 
-.gallery-image-wrapper {
+.gallery-item {
     position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    padding-top: 66.67%; /* 3:2 aspect ratio */
+    background-color: #f0f0f0;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.gallery-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -368,82 +201,10 @@ details[open] summary::before {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    transition: none; /* Remove transition to prevent zoom effect */
-    pointer-events: none; /* Disable click events */
-}
-
-.gallery-image-wrapper a {
+    transition: none;
     pointer-events: none;
-}
-
-.sub-gallery-item {
-    position: relative;
-}
-
-.gallery-image-wrapper::before,
-.sub-gallery-item::before {
-    content: "© Leo Photos";
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-    z-index: 1;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-}
-
-.gallery-item {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 3/2;
-    background-color: #f0f0f0;
-    width: 100%;
-}
-
-.gallery-item img
-{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    border-radius: 12px;
-    transition: transform 0.3s ease;
-    filter: none; /* Remove any filters that might affect image quality */
-    image-rendering: -webkit-optimize-contrast; /* Improve image sharpness on webkit browsers */
-    image-rendering: crisp-edges; /* Improve image sharpness on other browsers */
-}
-
-.sub-gallery-item img {
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    pointer-events: none;
     -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-}
-
-.gallery-item img[loading] {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-item img.loaded {
-    opacity: 1;
-}
-
-.gallery-item:hover {
-    transform: none; /* Remove lift effect */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Keep subtle shadow */
-}
-
-.gallery-item:hover img {
-    transform: none; /* Remove zoom effect */
 }
 
 .gallery-item-info {
@@ -454,6 +215,8 @@ details[open] summary::before {
     padding: 1rem;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
     color: white;
+    z-index: 2;
+    cursor: pointer;
     transition: opacity 0.3s ease;
 }
 
@@ -461,6 +224,7 @@ details[open] summary::before {
     margin: 0;
     font-size: 1.2rem;
     color: white;
+    transition: color 0.3s ease;
 }
 
 .gallery-item-info h3:hover {
@@ -468,7 +232,7 @@ details[open] summary::before {
 }
 
 .gallery-item-info p {
-  margin: 0.5rem 0 0;
+    margin: 0.5rem 0 0;
     font-size: 0.9rem;
     opacity: 0.9;
 }
@@ -490,7 +254,7 @@ details[open] summary::before {
 }
 
 .sub-gallery.active {
-   display: block;
+    display: block;
     opacity: 1;
 }
 
@@ -545,20 +309,31 @@ details[open] summary::before {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    height: auto; /* Allow height to be dynamic */
+    background-color: #f0f0f0;
 }
 
 .sub-gallery-item img {
     width: 100%;
-    height: auto; /* Allow height to adjust naturally */
-    min-height: 300px; /* Minimum height */
-    max-height: 80vh; /* Maximum height relative to viewport */
+    height: auto;
+    min-height: 300px;
+    max-height: 80vh;
     object-fit: cover;
     object-position: center;
+    transition: transform 0.3s ease;
 }
 
-.sub-gallery-item:hover img {
-    transform: scale(1.05);
+/* === Watermark === */
+.gallery-image-wrapper::before,
+.sub-gallery-item::before {
+    content: "© Leo Photos";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
 }
 
 /* === Visitor Counter === */
@@ -595,11 +370,10 @@ details[open] summary::before {
 }
 
 .footer-content {
-   max-width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .footer-nav {
@@ -620,12 +394,7 @@ details[open] summary::before {
     text-decoration: underline;
 }
 
-.nav-separator {
-    color: #457b9d;
-    opacity: 0.5;
-}
-
-/* === Dark Mode Styles === */
+/* === Dark Mode === */
 body.dark-mode {
     color: #e1e1e1;
 }
@@ -645,9 +414,10 @@ body.dark-mode .theme-toggle .icon-dark {
     transform: translateY(0);
 }
 
-body.dark-mode .site-header {
+body.dark-mode .site-header,
+body.dark-mode .site-footer {
     background-color: rgba(30, 30, 30, 0.3);
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 body.dark-mode .site-title {
@@ -658,51 +428,9 @@ body.dark-mode .site-title .title-sub {
     color: #a8d8ff;
 }
 
-body.dark-mode .site-description {
-    color: #dddddd;
-}
-
 body.dark-mode .country-card {
     background-color: rgba(30, 30, 30, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .country-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .country-header {
-    color: #ffffff;
-}
-
-body.dark-mode .country-header:hover {
-    color: #a8d8ff;
-}
-
-body.dark-mode .gallery-item:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .gallery-item-info {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1rem;
-    border-radius: 0 0 12px 12px;
-}
-
-body.dark-mode .gallery-item {
-    background-color: #2a2a2a;
-}
-
-body.dark-mode .gallery-item-info h3 {
-    color: #ffffff;
-}
-
-body.dark-mode .gallery-item-info p {
-    color: #dddddd;
-}
-
-body.dark-mode .gallery-item img {
-   filter: brightness(1.05); /* Slightly increase brightness in dark mode */
 }
 
 body.dark-mode .visitor-counter {
@@ -710,106 +438,25 @@ body.dark-mode .visitor-counter {
     color: white;
 }
 
-body.dark-mode .site-footer {
-    background-color: rgba(30, 30, 30, 0.3);
-    border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .footer-nav a {
-    color: #a8d8ff;
-}
-
-body.dark-mode .footer-nav a:hover {
-    color: #ffffff;
-}
-
-body.dark-mode .nav-separator {
-    color: rgba(168, 216, 255, 0.5);
-}
-
-/* === Additional Dark Mode Styles === */
-body.dark-mode .copyright-modal {
-    background: rgba(20, 20, 20, 0.95);
-}
-
-body.dark-mode .modal-close {
-    background: #1d3557;
-    color: white;
-}
-
-body.dark-mode .modal-close:hover {
-    background: #2a4a6d;
-}
-
-/* === Animations === */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* === Lightbox Enhancements === */
-.glightbox img {
-    cursor: zoom-in;
-}
-
 /* === Responsive Design === */
 @media (max-width: 768px) {
-    /* Header */
     .header-text {
         text-align: center;
-    }
-
-    .header-content,
-    .footer-content {
-        padding: 0 1rem;
     }
 
     .site-title {
         font-size: 2rem;
     }
 
-    .site-title .title-sub {
-        font-size: 1rem;
-    }
-
-    .site-description {
-        font-size: 0.9rem;
-    }
-
-  /* Gallery */
     .gallery {
         grid-template-columns: 1fr;
         gap: 1rem;
-        padding: 0.5rem;
     }
 
     .gallery-item {
-        aspect-ratio: 16/9;
-        width: 100%;
+        padding-top: 56.25%; /* 16:9 aspect ratio */
     }
 
-    .gallery-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-    .gallery-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transition: none;
-}
-
-    /* Theme Toggle */
     .theme-toggle {
         top: 10px;
         right: 10px;
@@ -817,7 +464,6 @@ body.dark-mode .modal-close:hover {
         height: 40px;
     }
 
-    /* Sub Gallery */
     .sub-gallery {
         padding: 1rem;
     }
@@ -827,115 +473,15 @@ body.dark-mode .modal-close:hover {
         gap: 1rem;
     }
 
-    .sub-gallery-item {
-        height: auto;
-    }
-
-    .sub-gallery-item img {
-        min-height: 250px;
-        max-height: 70vh;
-    }
-
     .sub-gallery-close {
         right: 20px;
         top: 10px;
     }
 
-    /* Visitor Counter */
-    .visitor-counter {
-        bottom: 10px;
-        left: 10px;
-        font-size: 0.8rem;
-    }
-
-    /* Footer */
     .footer-nav {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
-    }
-
-    .nav-separator {
-        display: none;
-    }
-}
-    /* Visitor Counter */
-    .visitor-counter {
-        bottom: 10px;
-        left: 10px;
-        font-size: 0.8rem;
-    }
-
-    /* Footer */
-    .footer-nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .nav-separator {
-        display: none;
-    }
-}
-
-@media (min-width: 768px) {
-    .gallery {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .gallery-item {
-        aspect-ratio: 16/9; /* Wider aspect ratio for mobile */
-    }
-
-    .sub-gallery-item img {
-        min-height: 250px; /* Smaller minimum height on mobile */
-        max-height: 70vh; /* Smaller maximum height on mobile */
-    }
-}
-
-@media (max-width: 480px) {
-    .site-main {
-        padding: 1rem;
-    }
-
-    .header-content {
-        padding: 1rem;
-    }
-
-    .country-header {
-        font-size: 1.2rem;
-    }
-
-    .sub-gallery-close {
-        right: 20px;
-        font-size: 1.5rem;
-    }
-}
-
-/* === Utility Classes === */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-/* === Reduced Motion === */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
     }
 }
 
@@ -943,23 +489,6 @@ html, body {
 @media (max-width: 480px) {
     .site-main {
         padding: 1rem;
-    }
-
-    .gallery {
-        gap: 1rem;
-    }
-
-    .gallery-item {
-        aspect-ratio: 16/9;
-    }
-
-    .country-card {
-        padding: 0.5rem;
-    }
-
-    .country-header {
-        font-size: 1.2rem;
-        padding: 0.5rem;
     }
 
     .gallery-item-info {
@@ -979,18 +508,60 @@ html, body {
     }
 }
 
-/* === Fix for iOS Safari === */
+/* === Touch Device Optimizations === */
+@media (hover: none) and (pointer: coarse) {
+    .gallery-item-info {
+        opacity: 1;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    }
+
+    .gallery-item:active {
+        transform: scale(0.98);
+    }
+}
+
+/* === iOS Safari Fixes === */
 @supports (-webkit-touch-callout: none) {
+    #background-image {
+        background-attachment: scroll;
+    }
+
     .gallery-item {
         height: 0;
         padding-bottom: 66.67%;
     }
+}
 
-    .gallery-image-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+/* === Animations === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* === Utility Classes === */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
