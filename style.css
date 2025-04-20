@@ -82,11 +82,109 @@ img {
   font-size: 1rem;
 }
 
+/* === Theme Toggle === */
 .theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle .icon-light,
+.theme-toggle .icon-dark {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle .icon-dark {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Dark Mode Styles */
+body.dark-mode .theme-toggle {
+    background: rgba(30, 30, 30, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .theme-toggle .icon-light {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+body.dark-mode .theme-toggle .icon-dark {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dark Mode UI Elements */
+body.dark-mode .site-header {
+    background-color: rgba(30, 30, 30, 0.85);
+}
+
+body.dark-mode .site-title {
+    color: #ffffff;
+}
+
+body.dark-mode .site-title .title-sub {
+    color: #a8d8ff;
+}
+
+body.dark-mode .site-description {
+    color: #dddddd;
+}
+
+body.dark-mode .country-card {
+    background-color: rgba(30, 30, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .country-header {
+    color: #ffffff;
+}
+
+body.dark-mode .gallery-item-info h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .gallery-item-info p {
+    color: #dddddd;
+}
+
+body.dark-mode .site-footer {
+    background-color: rgba(30, 30, 30, 0.85);
+    color: #dddddd;
+}
+
+body.dark-mode .footer-nav a {
+    color: #a8d8ff;
+}
+
+body.dark-mode .footer-nav a:hover {
+    color: #ffffff;
+}
+
+body.dark-mode .language-select {
+    background-color: rgba(30, 30, 30, 0.9);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* === Filters === */
