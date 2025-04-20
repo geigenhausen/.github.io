@@ -200,6 +200,29 @@
         zoomable: true
       });
 
+      document.addEventListener('DOMContentLoaded', function() {
+    // Function to close sub-gallery
+    function closeSubGallery() {
+        const activeSubGallery = document.querySelector('.sub-gallery.active');
+        if (activeSubGallery) {
+            activeSubGallery.classList.remove('active');
+        }
+    }
+
+    // Listen for escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeSubGallery();
+        }
+    });
+
+    // Add click handler to close buttons
+    const closeButtons = document.querySelectorAll('.sub-gallery-close');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeSubGallery);
+    });
+});
+
        // Sub-gallery functionality
       document.querySelectorAll('.gallery-item-info h3').forEach(title => {
         title.style.cursor = 'pointer'; // Make it clear it's clickable
