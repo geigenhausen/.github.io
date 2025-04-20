@@ -176,6 +176,119 @@ select:focus {
     min-height: calc(100vh - 200px);
 }
 
+/* === Image Protection Styles === */
+.gallery-item img,
+.sub-gallery-item img {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
+/* === Copyright Modal === */
+.copyright-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 2rem;
+    border-radius: 12px;
+    color: white;
+    z-index: 9999;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.copyright-modal.active {
+    display: block;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.copyright-content {
+    max-width: 400px;
+}
+
+.copyright-content h3 {
+    margin: 0 0 1rem;
+    color: #a8d8ff;
+}
+
+.copyright-content p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.modal-close {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: #a8d8ff;
+    color: #000;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.modal-close:hover {
+    background: #7ac0ff;
+}
+
+/* === Blur Protection === */
+.page-blurred .gallery-item img,
+.page-blurred .sub-gallery-item img {
+    filter: blur(20px);
+    transition: filter 0.3s ease;
+}
+
+/* === Watermark === */
+.gallery-image-wrapper::before,
+.sub-gallery-item::before {
+    content: "© Leo Photos";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+/* === Additional Animations === */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* === Hover Watermark === */
+.gallery-image-wrapper:hover::after,
+.sub-gallery-item:hover::after {
+   content: "© Leo Photos";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
 /* === Countries & Gallery === */
 .countries-grid {
     position: relative;
@@ -244,9 +357,14 @@ details[open] summary::before {
 }
 
 .gallery-image-wrapper, {
-    min-height: 200px;
-    background: #eee;
-    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.gallery-image-wrapper a {
+    pointer-events: none;
 }
 
 .sub-gallery-item {
@@ -270,9 +388,10 @@ details[open] summary::before {
    position: relative;
     border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 16/9; /* Maintains consistent image ratio */
+    aspect-ratio: 16/9;
     background-color: #f0f0f0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
 }
 
 .gallery-item:hover {
@@ -602,6 +721,20 @@ body.dark-mode .footer-nav a:hover {
 
 body.dark-mode .nav-separator {
     color: rgba(168, 216, 255, 0.5);
+}
+
+/* === Additional Dark Mode Styles === */
+body.dark-mode .copyright-modal {
+    background: rgba(20, 20, 20, 0.95);
+}
+
+body.dark-mode .modal-close {
+    background: #1d3557;
+    color: white;
+}
+
+body.dark-mode .modal-close:hover {
+    background: #2a4a6d;
 }
 
 /* === Animations === */
