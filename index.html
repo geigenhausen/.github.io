@@ -30,6 +30,16 @@
     }
   </style>
 </head>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  const lightbox = GLightbox({
+    selector: '.glightbox',
+    touchNavigation: true,
+    loop: true,
+    closeButton: true,
+    zoomable: true,
+  });
+</script>
 <body>
   <header class="site-header">
     <div class="header-content">
@@ -58,12 +68,6 @@
   </header>
 
   <main class="site-main">
-    <div class="gallery-filters">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="nature">Nature</button>
-      <button class="filter-btn" data-filter="urban">Urban</button>
-      <button class="filter-btn" data-filter="culture">Culture</button>
-    </div>
 
     <div class="countries-grid">
       <section class="country-card" data-country="japan">
