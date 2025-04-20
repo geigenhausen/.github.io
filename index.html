@@ -224,6 +224,81 @@
                 zoomable: true
             });
 
+         document.addEventListener('DOMContentLoaded', function() {
+         // Disable right click
+         document.addEventListener('contextmenu', function(e) {
+         e.preventDefault();
+         showCopyrightNotice();
+         });
+
+    // Disable keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Prevent PrintScreen
+        if (e.key === 'PrintScreen') {
+            e.preventDefault();
+            showCopyrightNotice();
+        }
+
+        // Prevent Ctrl/Cmd + S, Ctrl/Cmd + C, Ctrl/Cmd + I, Ctrl/Cmd + U, Ctrl/Cmd + P
+        if (e.ctrlKey || e.metaKey) {
+            switch (e.key.toLowerCase()) {
+                case 's':
+                case 'c':
+                case 'i':
+                case 'u':
+                case 'p':
+                    e.preventDefault();
+                    showCopyrightNotice();
+                    break;
+            }
+        }
+    });
+
+// Disable drag and drop
+    document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+    });
+
+    // Create copyright notice modal
+    const modal = document.createElement('div');
+    modal.className = 'copyright-modal';
+    modal.innerHTML = `
+        <div class="copyright-content">
+            <h3>© Copyright Notice</h3>
+            <p>These images are protected by copyright law.</p>
+            <p>Unauthorized use, reproduction, or distribution is prohibited.</p>
+            <p>For licensing or usage inquiries, please contact:</p>
+            <p>contact@leophotos.com</p>
+            <button class="modal-close">Close</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Add modal close functionality
+    modal.querySelector('.modal-close').addEventListener('click', function() {
+        modal.classList.remove('active');
+    });
+
+    // Function to show copyright notice
+    function showCopyrightNotice() {
+        modal.classList.add('active');
+        setTimeout(() => modal.classList.remove('active'), 3000);
+    }
+
+    // Add blur protection when window loses focus
+    let blurTimeout;
+    window.addEventListener('blur', function() {
+        blurTimeout = setTimeout(() => {
+            document.body.classList.add('page-blurred');
+        }, 100);
+    });
+
+    window.addEventListener('focus', function() {
+        clearTimeout(blurTimeout);
+        document.body.classList.remove('page-blurred');
+    });
+});
+             
             // Image loading handler
 document.querySelectorAll('.gallery-image-wrapper img').forEach(img => {
     if (img.complete) {
