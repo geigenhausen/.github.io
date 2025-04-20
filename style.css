@@ -114,9 +114,10 @@ select:focus {
 .site-title .title-sub {
     display: block;
     font-size: 1.2rem;
-    font-weight: 400;
-    color: #457b9d;
+    font-weight: 500; /* Changed from 400 */
+    color: #1d3557; /* Changed from #457b9d */
     margin-top: 0.25rem;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* Added this line */
 }
 
 .site-description {
@@ -167,6 +168,29 @@ select:focus {
     margin: 0 auto;
     padding: 2rem;
     min-height: calc(100vh - 200px);
+}
+
+.country-card {
+    background-color: rgba(255, 255, 255, 0.95); /* Changed from 0.9 */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.country-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem; /* Changed from 0.5rem 0 */
+    margin: -0.5rem -1rem 0.5rem; /* Added this line */
+    background-color: rgba(255, 255, 255, 0.9); /* Added this line */
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1d3557; /* Changed from #2b2d42 */
 }
 
 /* === Gallery Layout === */
@@ -360,9 +384,9 @@ select:focus {
 .site-footer {
     position: relative;
     z-index: 1;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.8); /* Changed from 0.3 */
     backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(204, 204, 204, 0.3);
+    border-top: 1px solid rgba(204, 204, 204, 0.5);
     padding: 1.5rem 0;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
@@ -377,7 +401,8 @@ select:focus {
 }
 
 .footer-nav {
-    display: flex;
+   display: flex;
+    justify-content: space-between; /* Changed from align-items: center */
     align-items: center;
     gap: 2rem;
 }
@@ -392,6 +417,32 @@ select:focus {
 .footer-nav a:hover {
     color: #1d3557;
     text-decoration: underline;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 0 auto;
+}
+
+.nav-links a {
+    color: #1d3557;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #457b9d;
+    text-decoration: underline;
+}
+
+.copyright-text {
+    color: #1d3557;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 /* === Dark Mode === */
@@ -421,21 +472,35 @@ body.dark-mode .site-footer {
 }
 
 body.dark-mode .site-title {
-    color: #ffffff;
+    color: #a8d8ff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .site-title .title-sub {
     color: #a8d8ff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 body.dark-mode .country-card {
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+body.dark-mode .country-header {
     background-color: rgba(30, 30, 30, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
 body.dark-mode .visitor-counter {
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
+}
+
+body.dark-mode .nav-links a {
+    color: #a8d8ff;
+}
+
+body.dark-mode .copyright-text {
+    color: #a8d8ff;
 }
 
 /* === Responsive Design === */
@@ -479,9 +544,22 @@ body.dark-mode .visitor-counter {
     }
 
     .footer-nav {
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 1rem;
         text-align: center;
+    }
+
+        .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .nav-separator {
+        display: none;
+    }
+
+    .copyright-text {
+        margin-bottom: 1rem;
     }
 }
 
