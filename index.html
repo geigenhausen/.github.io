@@ -42,16 +42,16 @@
                     <p class="site-description">🇫🇷 living in 🇯🇵 showcasing worldwide pictures.</p>
                 </div>
             </div>
-            <!-- Add copyright modal -->
-            <div id="modal" class="copyright-modal">
-                <div class="modal-content">
-                    <button class="modal-close">×</button>
-                    <p>© 2025 Leo Photos. All rights reserved.</p>
-                </div>
-            </div>
         </header>
 
         <main class="site-main">
+            <!-- Add copyright modal -->
+            <div id="modal" class="copyright-modal">
+                <div class="modal-content">
+                    <p>© 2025 Leo Photos. All rights reserved.</p>
+                </div>
+            </div>
+
             <div class="countries-grid">
                 <!-- Japan Section -->
                 <section class="country-card" data-country="japan">
@@ -292,6 +292,8 @@
                 if (subGallery) {
                     subGallery.classList.add('active');
                     document.body.style.overflow = 'hidden';
+                    // Reinitialize lightbox when opening sub-gallery
+                    lightbox.reload();
                 }
             }
 
@@ -305,11 +307,16 @@
 
             // Gallery item click handlers
             galleryItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const region = this.getAttribute('data-region');
-                    openSubGallery(region);
+                const imageWrapper = item.querySelector('.gallery-image-wrapper');
+                const itemInfo = item.querySelector('.gallery-item-info');
+                
+                [imageWrapper, itemInfo].forEach(element => {
+                    element.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const region = item.getAttribute('data-region');
+                        openSubGallery(region);
+                    });
                 });
             });
 
