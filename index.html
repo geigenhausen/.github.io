@@ -262,7 +262,9 @@
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
                 
                 // Update background opacity in dark mode
-                backgroundElement.style.opacity = isDark ? '0.3' : '1';
+                if (backgroundElement.style.backgroundImage) {
+                    backgroundElement.style.opacity = isDark ? '0.5' : '1';
+                }
             }
 
             // Initialize theme
@@ -348,7 +350,8 @@
             
             backgroundImage.onload = function() {
                 backgroundElement.style.backgroundImage = `url('${this.src}')`;
-                backgroundElement.style.opacity = document.body.classList.contains('dark-mode') ? '0.3' : '1';
+                // Set initial opacity based on current theme
+                backgroundElement.style.opacity = document.body.classList.contains('dark-mode') ? '0.5' : '1';
             };
 
             backgroundImage.onerror = function() {
