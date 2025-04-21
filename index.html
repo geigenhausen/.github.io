@@ -236,6 +236,46 @@
             const backgroundElement = document.getElementById('background-image');
             const modal = document.getElementById('modal');
 
+            // Prevent image saving on mobile devices
+            function preventImageSaving(e) {
+                e.preventDefault();
+                if (modal) {
+                    modal.classList.add('active');
+                    setTimeout(() => modal.classList.remove('active'), 3000);
+                }
+            }
+
+            // Add touch protection to all images
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('touchstart', function(e) {
+                    // Prevent long press menu on iOS
+                    e.preventDefault();
+                });
+                img.addEventListener('touchend', function(e) {
+                    // Only prevent if it was a long press
+                    if (e.changedTouches[0].duration > 500) {
+                        preventImageSaving(e);
+                    }
+                });
+                img.addEventListener('contextmenu', preventImageSaving);
+                // Prevent drag and drop
+                img.addEventListener('dragstart', preventImageSaving);
+            });
+
+            // Add -webkit-touch-callout: none to all images via JavaScript
+            const style = document.createElement('style');
+            style.textContent = `
+                img {
+                    -webkit-touch-callout: none;
+                    -webkit-user-select: none;
+                    -khtml-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+            `;
+            document.head.appendChild(style);
+
             // Initialize Lightbox
             const lightbox = GLightbox({
                 touchNavigation: true,
@@ -252,7 +292,7 @@
                 
                 // Update background opacity in dark mode
                 if (isDark) {
-                    backgroundElement.style.opacity = '0.3';
+                    backgroundElement.style.opacity = '0.5';
                 } else {
                     backgroundElement.style.opacity = '1';
                 }
