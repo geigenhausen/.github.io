@@ -260,14 +260,9 @@
             function setTheme(isDark) {
                 document.body.classList.toggle('dark-mode', isDark);
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                
-                // Update background opacity in dark mode
-                if (backgroundElement.style.backgroundImage) {
-                    backgroundElement.style.opacity = isDark ? '0.5' : '1';
-                }
             }
 
-            // Initialize theme
+            // Initialize theme before loading background
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
@@ -275,6 +270,7 @@
                 setTheme(true);
             }
 
+            // Theme toggle event listener
             themeToggle.addEventListener('click', () => {
                 const isDark = !document.body.classList.contains('dark-mode');
                 setTheme(isDark);
@@ -350,8 +346,6 @@
             
             backgroundImage.onload = function() {
                 backgroundElement.style.backgroundImage = `url('${this.src}')`;
-                // Set initial opacity based on current theme
-                backgroundElement.style.opacity = document.body.classList.contains('dark-mode') ? '0.5' : '1';
             };
 
             backgroundImage.onerror = function() {
