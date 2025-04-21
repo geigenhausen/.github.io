@@ -151,7 +151,7 @@ select:focus {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-.theme-toggle .icon-light
+.theme-toggle .icon-light {
     opacity: 1;
     transform: translateY(0);
     position: absolute;
@@ -343,7 +343,7 @@ select:focus {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
     max-height: 80vh;
 }
 
