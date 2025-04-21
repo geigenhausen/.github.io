@@ -251,11 +251,7 @@
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
                 
                 // Update background opacity in dark mode
-                if (isDark) {
-                    backgroundElement.style.opacity = '0.3';
-                } else {
-                    backgroundElement.style.opacity = '1';
-                }
+                backgroundElement.style.opacity = isDark ? '0.3' : '1';
             }
 
             // Initialize theme
@@ -336,32 +332,12 @@
             localStorage.setItem('visitorCount', count);
             visitorCount.textContent = count.toLocaleString();
 
-            updateVisitorCount();
-
-            // Theme toggle
-            function setTheme(isDark) {
-                document.body.classList.toggle('dark-mode', isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            }
-
-            // Initialize theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark' || 
-                (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                setTheme(true);
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = !document.body.classList.contains('dark-mode');
-                setTheme(isDark);
-            });
-
             // Background image
             const backgroundImage = new Image();
             
             backgroundImage.onload = function() {
                 backgroundElement.style.backgroundImage = `url('${this.src}')`;
-                backgroundElement.style.opacity = '1';
+                backgroundElement.style.opacity = document.body.classList.contains('dark-mode') ? '0.3' : '1';
             };
 
             backgroundImage.onerror = function() {
