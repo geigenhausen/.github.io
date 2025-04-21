@@ -151,15 +151,16 @@ select:focus {
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-.theme-toggle .icon-light,
-.theme-toggle .icon-dark {
+.theme-toggle .icon-light
+    opacity: 1;
+    transform: translateY(0);
     position: absolute;
-    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .theme-toggle .icon-dark {
     opacity: 0;
     transform: translateY(20px);
+    position: absolute;
 }
 
 /* === Main Content === */
@@ -280,6 +281,7 @@ select:focus {
 .sub-gallery.active {
     display: block;
     opacity: 1;
+    padding-top: 60px; /* Add space for close button */
 }
 
 .sub-gallery-header {
@@ -334,16 +336,15 @@ select:focus {
     border-radius: 12px;
     overflow: hidden;
     background-color: #f0f0f0;
+    margin-bottom: 2rem;
 }
 
 .sub-gallery-item img {
     width: 100%;
     height: auto;
-    min-height: 300px;
+    display: block;
+    object-fit: contain;
     max-height: 80vh;
-    object-fit: cover;
-    object-position: center;
-    transition: transform 0.3s ease;
 }
 
 /* === Watermark === */
@@ -448,7 +449,12 @@ select:focus {
 /* === Dark Mode === */
 body.dark-mode {
     color: #e1e1e1;
-    background: transparent;
+    background: #1a1a1a;
+}
+
+body.dark-mode #background-image {
+    opacity: 0.3; /* Reduce opacity in dark mode */
+    filter: brightness(0.7) contrast(1.2); /* Enhance dark mode appearance */
 }
 
 body.dark-mode .theme-toggle {
@@ -467,7 +473,7 @@ body.dark-mode .theme-toggle .icon-dark {
 }
 
 body.dark-mode .site-header {
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(20, 20, 20, 0.9);
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -476,7 +482,7 @@ body.dark-mode .site-description {
 }
 
 body.dark-mode .country-card {
-    background-color: rgba(30, 30, 30, 0.95);
+    background-color: rgba(20, 20, 20, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -508,7 +514,7 @@ body.dark-mode .visitor-counter {
 }
 
 body.dark-mode .site-footer {
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(20, 20, 20, 0.9);
     border-top-color: rgba(255, 255, 255, 0.1);
 }
 
