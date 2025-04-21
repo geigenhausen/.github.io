@@ -890,3 +890,53 @@ body.dark-mode .sub-gallery-close:hover {
         transition: transform 0.1s ease;
     }
 }
+
+/* === Lightbox Customization === */
+.glightbox-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.glightbox-clean .gslide-description {
+    background: transparent;
+}
+
+.gslide-image img {
+    object-fit: contain;
+    max-height: 90vh !important;
+    margin: 0 auto;
+}
+
+.gslide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gslide-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ginner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gslide-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+/* Ensure zoom starts from center */
+.zoomed .gslide-media {
+    transform-origin: center center;
+}
