@@ -42,7 +42,14 @@
                     <p class="site-description">🇫🇷 living in 🇯🇵 showcasing worldwide pictures.</p>
                 </div>
             </div>
-         </header>
+            <!-- Add copyright modal -->
+            <div id="modal" class="copyright-modal">
+                <div class="modal-content">
+                    <button class="modal-close">×</button>
+                    <p>© 2025 Leo Photos. All rights reserved.</p>
+                </div>
+            </div>
+        </header>
 
         <main class="site-main">
             <div class="countries-grid">
@@ -227,6 +234,7 @@
             const themeToggle = document.getElementById('theme-toggle');
             const visitorCount = document.getElementById('visitor-count');
             const backgroundElement = document.getElementById('background-image');
+            const modal = document.getElementById('modal');
 
             // Initialize Lightbox
             const lightbox = GLightbox({
@@ -239,8 +247,10 @@
 
             // Copyright protection function
             function showCopyrightNotice() {
-                modal.classList.add('active');
-                setTimeout(() => modal.classList.remove('active'), 3000);
+                if (modal) {
+                    modal.classList.add('active');
+                    setTimeout(() => modal.classList.remove('active'), 3000);
+                }
             }
 
             // Image loading handler
@@ -295,12 +305,10 @@
 
             // Gallery item click handlers
             galleryItems.forEach(item => {
-                const itemInfo = item.querySelector('.gallery-item-info');
-                
-                itemInfo.addEventListener('click', function(e) {
+                item.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    const region = item.getAttribute('data-region');
+                    const region = this.getAttribute('data-region');
                     openSubGallery(region);
                 });
             });
