@@ -242,57 +242,41 @@
                 loop: true,
                 closeButton: true,
                 zoomable: true,
-                selector: '.sub-gallery-item a'
+                selector: '.glightbox'
             });
 
-            // Copyright protection function
-            function showCopyrightNotice() {
-                if (modal) {
-                    modal.classList.add('active');
-                    setTimeout(() => modal.classList.remove('active'), 3000);
-                }
-            }
-
-            // Image loading handler
-            function handleImageLoad(img) {
-                img.classList.add('loaded');
-                const wrapper = img.closest('.gallery-image-wrapper');
-                if (wrapper) {
-                    wrapper.classList.add('loaded');
-                }
-            }
-
-            function handleImageError(img) {
-                console.error('Failed to load image:', img.src);
-                const wrapper = img.closest('.gallery-image-wrapper');
-                if (wrapper) {
-                    wrapper.style.backgroundColor = '#f0f0f0';
-                    wrapper.innerHTML = `
-                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-                                    display: flex; align-items: center; justify-content: center; 
-                                    padding: 1rem; text-align: center;">
-                            Image failed to load
-                        </div>`;
-                }
-            }
-
-            // Initialize images
-            document.querySelectorAll('img').forEach(img => {
-                if (img.complete) {
-                    handleImageLoad(img);
+            // Theme toggle functionality
+            function setTheme(isDark) {
+                document.body.classList.toggle('dark-mode', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                
+                // Update background opacity in dark mode
+                if (isDark) {
+                    backgroundElement.style.opacity = '0.3';
                 } else {
-                    img.addEventListener('load', () => handleImageLoad(img));
+                    backgroundElement.style.opacity = '1';
                 }
-                img.addEventListener('error', () => handleImageError(img));
+            }
+
+            // Initialize theme
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                setTheme(true);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = !document.body.classList.contains('dark-mode');
+                setTheme(isDark);
             });
 
-            // Sub-gallery functionality
+            // Gallery functionality
             function openSubGallery(region) {
                 const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
                 if (subGallery) {
                     subGallery.classList.add('active');
                     document.body.style.overflow = 'hidden';
-                    // Reinitialize lightbox when opening sub-gallery
                     lightbox.reload();
                 }
             }
@@ -305,18 +289,15 @@
                 }
             }
 
-            // Gallery item click handlers
+            // Add click handlers to gallery items
             galleryItems.forEach(item => {
-                const imageWrapper = item.querySelector('.gallery-image-wrapper');
-                const itemInfo = item.querySelector('.gallery-item-info');
+                const region = item.getAttribute('data-region');
                 
-                [imageWrapper, itemInfo].forEach(element => {
-                    element.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const region = item.getAttribute('data-region');
-                        openSubGallery(region);
-                    });
+                // Make both image and info clickable
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openSubGallery(region);
                 });
             });
 
@@ -333,118 +314,30 @@
                 });
             });
 
-            // Protection measures
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                showCopyrightNotice();
-            });
-
+            // ESC key handler
             document.addEventListener('keydown', function(e) {
-                // Close sub-gallery on ESC
                 if (e.key === 'Escape') {
                     closeSubGallery();
-                    return;
-                }
-
-                // Prevent PrintScreen
-                if (e.key === 'PrintScreen') {
-                    e.preventDefault();
-                    showCopyrightNotice();
-                    return;
-                }
-
-                // Prevent Ctrl/Cmd + S, C, I, U, P
-                if (e.ctrlKey || e.metaKey) {
-                    switch (e.key.toLowerCase()) {
-                        case 's':
-                        case 'c':
-                        case 'i':
-                        case 'u':
-                        case 'p':
-                            e.preventDefault();
-                            showCopyrightNotice();
-                            break;
-                    }
                 }
             });
 
-            // Disable drag and drop
-            document.addEventListener('dragstart', function(e) {
+            // Copyright protection
+            document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
+                if (modal) {
+                    modal.classList.add('active');
+                    setTimeout(() => modal.classList.remove('active'), 3000);
+                }
             });
 
-            // Modal close functionality
-            modal.querySelector('.modal-close').addEventListener('click', function() {
-                modal.classList.remove('active');
-            });
+            // Update visitor count
+            let count = parseInt(localStorage.getItem('visitorCount') || '0');
+            count++;
+            localStorage.setItem('visitorCount', count);
+            visitorCount.textContent = count.toLocaleString();
 
-            // Blur protection
-            let blurTimeout;
-            window.addEventListener('blur', function() {
-                blurTimeout = setTimeout(() => {
-                    document.body.classList.add('page-blurred');
-                }, 100);
-            });
-
-            window.addEventListener('focus', function() {
-                clearTimeout(blurTimeout);
-                document.body.classList.remove('page-blurred');
-            });
-
-            // Visitor counter
-            function getVisitorCount() {
-                let count = localStorage.getItem('visitorCount');
-                return parseInt(count || '0');
-            }
-
-            function updateVisitorCount() {
-                let count = getVisitorCount();
-                count++;
-                localStorage.setItem('visitorCount', count);
-                visitorCount.textContent = count.toLocaleString();
-            }
-
-            updateVisitorCount();
-
-            // Theme toggle
-            function setTheme(isDark) {
-                document.body.classList.toggle('dark-mode', isDark);
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            }
-
-            // Initialize theme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark' || 
-                (savedTheme === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                setTheme(true);
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = !document.body.classList.contains('dark-mode');
-                setTheme(isDark);
-            });
-
-            // Background image
-            const backgroundImage = new Image();
-            
-            backgroundImage.onload = function() {
-                backgroundElement.style.backgroundImage = `url('${this.src}')`;
-                backgroundElement.style.opacity = '1';
-            };
-
-            backgroundImage.onerror = function() {
-                console.error('Failed to load background image');
-                backgroundElement.style.backgroundColor = '#1a1a1a';
-            };
-
-            backgroundImage.src = 'wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg';
-
-            // Prevent details from closing when clicking gallery items
-            document.querySelectorAll('.gallery').forEach(gallery => {
-                gallery.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                });
-            });
+            // Set background image
+            backgroundElement.style.backgroundImage = `url('wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg')`;
         });
     </script>
 </body>
