@@ -255,28 +255,14 @@
                 zoomable: true,
                 draggable: true,
                 selector: '.glightbox',
-                height: '100vh',
-                width: '100vw',
-                preload: true,
-                zoomEvents: true,
-                moreLength: 0,
-                startAt: 0,
+                preload: false,
+                height: 'auto',
+                width: 'auto',
                 slideEffect: 'fade',
-                cssEfects: {
-                    fade: { in: 'fadeIn', out: 'fadeOut' }
-                },
+                closeOnOutsideClick: true,
                 descPosition: 'bottom',
                 touchFollowAxis: true,
-                keyboardNavigation: true,
-                closeOnOutsideClick: true,
-                plyr: {
-                    css: 'https://cdn.plyr.io/3.6.3/plyr.css',
-                    js: 'https://cdn.plyr.io/3.6.3/plyr.js',
-                    config: {
-                        ratio: '16:9',
-                        fullscreen: { enabled: true }
-                    }
-                }
+                keyboardNavigation: true
             });
 
             // Theme toggle functionality
