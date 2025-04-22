@@ -247,7 +247,36 @@
             const backgroundElement = document.getElementById('background-image');
             const modal = document.getElementById('modal');
 
-            // Initialize Lightbox
+            // Prevent image saving and context menu
+            function preventImageSaving(e) {
+                e.preventDefault();
+                return false;
+            }
+
+            // Add protection for all images
+            document.addEventListener('contextmenu', preventImageSaving);
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            document.addEventListener('touchend', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
+            // Prevent default touch actions on images
+            const allImages = document.getElementsByTagName('img');
+            Array.from(allImages).forEach(img => {
+                img.addEventListener('touchstart', preventImageSaving, { passive: false });
+                img.addEventListener('touchend', preventImageSaving, { passive: false });
+                img.addEventListener('touchmove', preventImageSaving, { passive: false });
+                img.draggable = false;
+                img.addEventListener('dragstart', preventImageSaving);
+            });
+
+            // Initialize Lightbox with additional protection
             const lightbox = GLightbox({
                 touchNavigation: true,
                 loop: true,
@@ -262,7 +291,38 @@
                 closeOnOutsideClick: true,
                 descPosition: 'bottom',
                 touchFollowAxis: true,
-                keyboardNavigation: true
+                keyboardNavigation: true,
+                onOpen: () => {
+                    // Add protection to lightbox images
+                    const lightboxImages = document.querySelectorAll('.gslide img');
+                    lightboxImages.forEach(img => {
+                        img.addEventListener('touchstart', preventImageSaving, { passive: false });
+                        img.addEventListener('touchend', preventImageSaving, { passive: false });
+                        img.addEventListener('touchmove', preventImageSaving, { passive: false });
+                        img.draggable = false;
+                    });
+                }
+            });
+
+            // Show copyright notice on save attempt
+            function showCopyrightNotice() {
+                if (modal) {
+                    modal.classList.add('active');
+                    setTimeout(() => modal.classList.remove('active'), 3000);
+                }
+            }
+
+            // Additional protection for iOS devices
+            document.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                    showCopyrightNotice();
+                }
+            }, { passive: false });
+
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+                showCopyrightNotice();
             });
 
             // Theme toggle functionality
@@ -332,15 +392,6 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     closeSubGallery();
-                }
-            });
-
-            // Copyright protection
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                if (modal) {
-                    modal.classList.add('active');
-                    setTimeout(() => modal.classList.remove('active'), 3000);
                 }
             });
 
