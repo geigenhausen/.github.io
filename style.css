@@ -867,6 +867,10 @@ body.dark-mode .sub-gallery-close:hover {
     border: 0;
 }
 
+.temporarily-hidden {
+    display: none !important;
+}
+
 /* Add copyright modal styles */
 .copyright-modal {
     display: none;
