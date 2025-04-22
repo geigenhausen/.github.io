@@ -978,13 +978,15 @@ body.dark-mode .sub-gallery-close:hover {
 /* === Image Protection === */
 .sub-gallery img,
 .gallery img,
-.gallery-image-wrapper,
 .gslide img {
-    pointer-events: none !important;
     -webkit-touch-callout: none !important;
     -webkit-user-select: none !important;
     user-select: none !important;
     -webkit-user-drag: none !important;
+}
+
+.gallery-image-wrapper {
+    cursor: pointer;
 }
 
 .sub-gallery-item,
@@ -994,6 +996,21 @@ body.dark-mode .sub-gallery-close:hover {
     -webkit-user-select: none !important;
     user-select: none !important;
     -webkit-user-drag: none !important;
+}
+
+/* Ensure clickable areas work on touch devices */
+.gallery-item a,
+.sub-gallery-item a,
+.glightbox {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Add active state for better touch feedback */
+.gallery-item:active,
+.sub-gallery-item:active {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
 }
 
 /* Prevent text selection */
