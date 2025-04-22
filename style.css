@@ -358,7 +358,7 @@ select:focus {
 
 .sub-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 2rem;
     padding: 2rem;
     max-width: 1400px;
@@ -375,9 +375,9 @@ select:focus {
 
 .sub-gallery-item .gallery-image-wrapper {
     position: relative;
-    height: auto;
+    height: 0;
     width: 100%;
-    padding-bottom: 66.67%; /* Maintain aspect ratio */
+    padding-bottom: 75%; /* Increased from 66.67% for larger images */
 }
 
 .sub-gallery-item .gallery-image-wrapper img {
@@ -386,7 +386,22 @@ select:focus {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.sub-gallery-item .gallery-item-info {
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.sub-gallery-item .gallery-item-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.sub-gallery-item .gallery-item-info p {
+    font-size: 0.9rem;
+    margin: 0;
 }
 
 /* === Watermark === */
@@ -711,6 +726,12 @@ body.dark-mode .sub-gallery-close:hover {
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         user-select: none;
+    }
+
+    .sub-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem;
     }
 }
 
