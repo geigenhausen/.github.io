@@ -974,3 +974,33 @@ body.dark-mode .sub-gallery-close:hover {
 .zoomed .gslide-media {
     transform-origin: center center;
 }
+
+/* === Image Protection === */
+.sub-gallery img,
+.gallery img,
+.gallery-image-wrapper,
+.gslide img {
+    pointer-events: none !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+}
+
+.sub-gallery-item,
+.gallery-item,
+.gslide-image {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+}
+
+/* Prevent text selection */
+.gallery-item-info,
+.sub-gallery-header,
+.site-header {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
