@@ -249,60 +249,32 @@
 
             // Prevent image saving and context menu
             function preventImageSaving(e) {
-                e.preventDefault();
-                return false;
+                // Only prevent default if it's a long press
+                if (e.type === 'contextmenu') {
+                    e.preventDefault();
+                    showCopyrightNotice();
+                    return false;
+                }
             }
 
             // Add protection for all images
             document.addEventListener('contextmenu', preventImageSaving);
+
+            // Handle touch events
+            let touchStartTime = 0;
+            const LONG_PRESS_DURATION = 500; // 500ms for long press
+
             document.addEventListener('touchstart', function(e) {
-                if (e.target.tagName === 'IMG') {
-                    e.preventDefault();
-                }
-            }, { passive: false });
+                touchStartTime = Date.now();
+            }, { passive: true });
+
             document.addEventListener('touchend', function(e) {
-                if (e.target.tagName === 'IMG') {
+                const touchDuration = Date.now() - touchStartTime;
+                if (touchDuration >= LONG_PRESS_DURATION && e.target.tagName === 'IMG') {
                     e.preventDefault();
+                    showCopyrightNotice();
                 }
             }, { passive: false });
-
-            // Prevent default touch actions on images
-            const allImages = document.getElementsByTagName('img');
-            Array.from(allImages).forEach(img => {
-                img.addEventListener('touchstart', preventImageSaving, { passive: false });
-                img.addEventListener('touchend', preventImageSaving, { passive: false });
-                img.addEventListener('touchmove', preventImageSaving, { passive: false });
-                img.draggable = false;
-                img.addEventListener('dragstart', preventImageSaving);
-            });
-
-            // Initialize Lightbox with additional protection
-            const lightbox = GLightbox({
-                touchNavigation: true,
-                loop: true,
-                closeButton: true,
-                zoomable: true,
-                draggable: true,
-                selector: '.glightbox',
-                preload: false,
-                height: 'auto',
-                width: 'auto',
-                slideEffect: 'fade',
-                closeOnOutsideClick: true,
-                descPosition: 'bottom',
-                touchFollowAxis: true,
-                keyboardNavigation: true,
-                onOpen: () => {
-                    // Add protection to lightbox images
-                    const lightboxImages = document.querySelectorAll('.gslide img');
-                    lightboxImages.forEach(img => {
-                        img.addEventListener('touchstart', preventImageSaving, { passive: false });
-                        img.addEventListener('touchend', preventImageSaving, { passive: false });
-                        img.addEventListener('touchmove', preventImageSaving, { passive: false });
-                        img.draggable = false;
-                    });
-                }
-            });
 
             // Show copyright notice on save attempt
             function showCopyrightNotice() {
@@ -323,6 +295,32 @@
             document.addEventListener('gesturestart', function(e) {
                 e.preventDefault();
                 showCopyrightNotice();
+            });
+
+            // Initialize Lightbox with improved touch handling
+            const lightbox = GLightbox({
+                touchNavigation: true,
+                loop: true,
+                closeButton: true,
+                zoomable: true,
+                draggable: true,
+                selector: '.glightbox',
+                preload: false,
+                height: 'auto',
+                width: 'auto',
+                slideEffect: 'fade',
+                closeOnOutsideClick: true,
+                descPosition: 'bottom',
+                touchFollowAxis: true,
+                keyboardNavigation: true,
+                onOpen: () => {
+                    // Add protection to lightbox images while allowing interaction
+                    const lightboxImages = document.querySelectorAll('.gslide img');
+                    lightboxImages.forEach(img => {
+                        img.style.pointerEvents = 'auto';
+                        img.draggable = false;
+                    });
+                }
             });
 
             // Theme toggle functionality
