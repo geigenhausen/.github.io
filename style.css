@@ -371,13 +371,22 @@ select:focus {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.2);
     margin-bottom: 2rem;
+    display: block;
+}
+
+.sub-gallery-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .sub-gallery-item .gallery-image-wrapper {
     position: relative;
-    height: 0;
     width: 100%;
-    padding-bottom: 75%; /* Increased from 66.67% for larger images */
+    padding-top: 66.67%; /* 3:2 aspect ratio */
+    overflow: hidden;
 }
 
 .sub-gallery-item .gallery-image-wrapper img {
@@ -387,6 +396,7 @@ select:focus {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .sub-gallery-item .gallery-item-info {
@@ -950,11 +960,14 @@ body.dark-mode .sub-gallery-close:hover {
 }
 
 .gslide-media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 100vw;
-    max-height: 100vh;
+    display: block !important;
+    max-height: 90vh !important;
+}
+
+.gslide img {
+    max-height: 90vh !important;
+    max-width: 90vw !important;
+    object-fit: contain !important;
 }
 
 /* Ensure zoom starts from center */
