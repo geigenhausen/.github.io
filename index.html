@@ -368,6 +368,12 @@
                 descPosition: 'bottom',
                 touchFollowAxis: true,
                 keyboardNavigation: true,
+                openEffect: 'zoom',
+                closeEffect: 'fade',
+                cssEfects: {
+                    zoom: { in: 'zoomIn', out: 'zoomOut' },
+                    fade: { in: 'fadeIn', out: 'fadeOut' }
+                },
                 onOpen: () => {
                     // Add protection to lightbox images while allowing interaction
                     const lightboxImages = document.querySelectorAll('.gslide img');
@@ -398,13 +404,16 @@
                 setTheme(isDark);
             });
 
-            // Gallery functionality
+            // Refresh lightbox when sub-gallery opens
             function openSubGallery(region) {
                 const subGallery = document.querySelector(`.sub-gallery[data-region="${region}"]`);
                 if (subGallery) {
                     subGallery.classList.add('active');
                     document.body.style.overflow = 'hidden';
-                    lightbox.reload();
+                    // Refresh lightbox after sub-gallery is visible
+                    setTimeout(() => {
+                        lightbox.reload();
+                    }, 100);
                 }
             }
 
@@ -435,9 +444,17 @@
 
             document.querySelectorAll('.sub-gallery').forEach(gallery => {
                 gallery.addEventListener('click', function(e) {
+                    // Only close if clicking the background, not the images or content
                     if (e.target === this) {
                         closeSubGallery();
                     }
+                });
+
+                // Prevent click propagation from gallery items
+                gallery.querySelectorAll('.sub-gallery-item').forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
                 });
             });
 
