@@ -369,23 +369,20 @@ select:focus {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.2);
-    margin-bottom: 2rem;
-    display: block;
+    transition: transform 0.3s ease;
 }
 
 .sub-gallery-item a {
     text-decoration: none;
     color: inherit;
     display: block;
-    width: 100%;
-    height: 100%;
+    cursor: zoom-in;
 }
 
 .sub-gallery-item .gallery-image-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 66.67%; /* 3:2 aspect ratio */
+    padding-bottom: 75%; /* 4:3 aspect ratio */
     overflow: hidden;
 }
 
@@ -399,19 +396,24 @@ select:focus {
     transition: transform 0.3s ease;
 }
 
+.sub-gallery-item:hover .gallery-image-wrapper img {
+    transform: scale(1.05);
+}
+
 .sub-gallery-item .gallery-item-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 1rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.sub-gallery-item .gallery-item-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.25rem;
-}
-
-.sub-gallery-item .gallery-item-info p {
-    font-size: 0.9rem;
-    margin: 0;
+.sub-gallery-item:hover .gallery-item-info {
+    opacity: 1;
 }
 
 /* === Watermark === */
