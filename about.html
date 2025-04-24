@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <!-- Styles -->
     <link rel="stylesheet" href="style.css" />
     <link rel="preload" as="image" href="wallpapers/tokyo_street_night_by_arsenixc_dbbpqj5.jpeg">
@@ -60,11 +63,55 @@
             color: #1d3557;
             text-decoration: none;
             font-size: 1.1rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-links a i {
+            font-size: 1.5rem;
         }
 
         .social-links a:hover {
             color: #457b9d;
+            transform: translateY(-2px);
+        }
+
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        .contact-icons a {
+            color: #1d3557;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(29, 53, 87, 0.1);
+        }
+
+        .contact-icons a i {
+            font-size: 1.5rem;
+        }
+
+        .contact-icons a span {
+            font-size: 1rem;
+        }
+
+        .contact-icons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         /* Dark mode styles */
@@ -83,6 +130,16 @@
 
         body.dark-mode .social-links a:hover {
             color: #ffffff;
+        }
+
+        body.dark-mode .contact-icons a {
+            color: #a8d8ff;
+            background: rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .contact-icons a:hover {
+            background: rgba(0, 0, 0, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -120,21 +177,28 @@
         <main class="site-main">
             <div class="about-container">
                 <div class="about-content">
-                    <p>Leo Foissac is a French photographer / adventurer born in South-west France. Surrounded by beautiful nature as he grew up, he also became attracted to foreign languages and countries. He is now based in Tokyo, Japan and strive taking finest shots of its future destination.
-                        he is also a travel enthousiast and shares his experiences on his <a href="https://www.instagram.com/photo_worldwide/">Instagram</a> and <a href="https://www.instagram.com/geigenhausen/">Instagram</a>.
-                        
-                        Leo can speak French, English, Japanese and German.
-
-                        Contact: leo.foissac@outlook.fr
-                    </p>
+                    <p>Leo Foissac is a French photographer / adventurer born in South-west France. Surrounded by beautiful nature as he grew up, he also became attracted to foreign languages and countries. He is now based in Tokyo, Japan and strive taking finest shots of its future destination.</p>
+                    
+                    <p>Leo can speak French, English, Japanese and German.</p>
                     
                     <!-- If you have a profile photo, uncomment and add the path -->
                     <!-- <img src="images/profile.jpg" alt="Leo Foissac" class="about-image"> -->
                     
+                    <div class="contact-icons">
+                        <a href="https://www.instagram.com/photo_worldwide/" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                            <span>@photo_worldwide</span>
+                        </a>
+                        <a href="mailto:leo.foissac@outlook.fr">
+                            <i class="far fa-envelope"></i>
+                            <span>Email Me</span>
+                        </a>
+                    </div>
+                    
                     <div class="social-links">
-                        <a href="/">Home</a>
-                        <a href="/">Gallery</a>
-                        <a href="/shop">Shop</a>
+                        <a href="index.html">Home</a>
+                        <a href="index.html">Gallery</a>
+                        <a href="shop.html">Shop</a>
                     </div>
                 </div>
             </div>
