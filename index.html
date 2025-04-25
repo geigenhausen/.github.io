@@ -497,7 +497,7 @@
                     const lastVisitTime = sessionStorage.getItem('lastVisitTime');
                     const currentTime = Date.now();
                     
-                    if (!lastVisitTime || (currentTime - parseInt(lastVisitTime)) > 30 * 60 * 1000) { // 30 minutes session timeout
+                    if (!lastVisitTime || (currentTime - parseInt(lastVisitTime)) > 15 * 60 * 1000) { // 15 minutes session timeout
                         // Increment the count
                         visitsRef.set(currentCount + 1);
                         sessionStorage.setItem('lastVisitTime', currentTime);
