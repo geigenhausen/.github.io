@@ -755,22 +755,14 @@
                         max-height: 25vh;
                     }
                 }
-
-                /* Zoom controls */
-                .gslide-media img {
-                    transition: transform 0.3s ease;
-                    cursor: zoom-in;
-                }
-
-                .gslide-media img.zoomed {
-                    cursor: zoom-out;
-                }
             `;
             document.head.appendChild(style);
 
             // Add zoom functionality
             document.addEventListener('click', function(e) {
                 if (e.target.tagName === 'IMG' && e.target.closest('.gslide-media')) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     const img = e.target;
                     if (img.classList.contains('zoomed')) {
                         img.style.transform = '';
@@ -780,7 +772,35 @@
                         img.classList.add('zoomed');
                     }
                 }
-            });
+            }, { passive: false });
+
+            // Prevent default click behavior on lightbox images
+            document.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'IMG' && e.target.closest('.gslide-media')) {
+                    e.preventDefault();
+                    return false;
+                }
+            }, { passive: false });
+
+            // Add styles for zoom
+            const zoomStyles = document.createElement('style');
+            zoomStyles.textContent = `
+                .gslide-media img {
+                    transition: transform 0.3s ease;
+                    cursor: zoom-in;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                }
+                .gslide-media img.zoomed {
+                    cursor: zoom-out;
+                }
+                .gslide-media {
+                    overflow: hidden;
+                }
+            `;
+            document.head.appendChild(zoomStyles);
 
             // Theme toggle functionality
             function setTheme(isDark) {
