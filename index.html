@@ -673,20 +673,20 @@
                         flex-direction: column;
                         padding: 0;
                         height: 100vh;
-                        max-height: 100vh;
+                        width: 100vw;
                         overflow: hidden;
                         display: flex;
+                        justify-content: center;
+                        align-items: center;
                         background: rgba(0, 0, 0, 0.9);
                     }
 
                     .gslide-media-wrap {
                         width: 100vw;
-                        height: 65vh;
+                        height: 100vh;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        margin: 0;
-                        padding: 0;
                     }
 
                     .gslide-media {
@@ -699,103 +699,21 @@
 
                     .gslide-media img {
                         max-width: 100vw;
-                        max-height: 65vh;
+                        max-height: 100vh;
                         width: auto;
                         height: auto;
                         object-fit: contain;
                     }
 
                     .gslide-desc-box {
-                        width: 100vw;
-                        height: 35vh;
-                        margin: 0;
-                        padding: 1.5rem;
-                        background: #1a1a1a;
-                        overflow-y: auto;
-                    }
-
-                    .gdesc-inner {
-                        max-width: 100%;
-                    }
-
-                    .gslide-title {
-                        color: #ffffff;
-                        font-size: 1.1rem;
-                        margin-bottom: 0.75rem;
-                        padding-bottom: 0.75rem;
-                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-                    }
-
-                    .gslide-desc {
-                        color: #ffffff;
-                        font-size: 0.95rem;
-                        line-height: 1.4;
-                        opacity: 0.9;
-                    }
-
-                    .shot-details {
-                        margin-top: 0.75rem;
-                        padding-top: 0.75rem;
-                        border-top: 1px solid rgba(255, 255, 255, 0.2);
-                    }
-
-                    .shot-details h3 {
-                        color: #ffffff;
-                        font-size: 1rem;
-                        margin-bottom: 0.5rem;
-                    }
-
-                    .shot-details ul {
-                        margin: 0;
-                        padding: 0;
-                    }
-
-                    .shot-details ul li {
-                        color: #ffffff;
-                        font-size: 0.95rem;
-                        margin-bottom: 0.5rem;
-                        opacity: 0.9;
-                    }
-                }
-
-                /* Adjustments for horizontal images */
-                @media (max-width: 768px) and (orientation: landscape) {
-                    .gslide-media-wrap {
-                        height: 70vh;
-                    }
-
-                    .gslide-media img {
-                        max-height: 70vh;
-                    }
-
-                    .gslide-desc-box {
-                        height: 30vh;
-                    }
-                }
-
-                /* Adjustments for vertical images */
-                @media (max-width: 768px) and (orientation: portrait) {
-                    .gslide-media-wrap {
-                        height: 60vh;
-                    }
-
-                    .gslide-media img {
-                        max-height: 60vh;
-                    }
-
-                    .gslide-desc-box {
-                        height: 40vh;
+                        display: none;
                     }
                 }
 
                 /* Desktop styles */
                 @media (min-width: 769px) {
                     .gslide-desc-box {
-                        background: rgba(26, 26, 26, 0.95);
-                    }
-
-                    .gslide-title, .gslide-desc, .shot-details h3, .shot-details ul li {
-                        color: #ffffff;
+                        display: none;
                     }
                 }
             `;
@@ -981,5 +899,4 @@
         });
     </script>
 </body>
-</html>
 </html>
