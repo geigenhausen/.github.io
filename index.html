@@ -671,17 +671,17 @@
                 @media (max-width: 768px) {
                     .ginner-container {
                         flex-direction: column;
-                        padding: 0.5rem;
+                        padding: 0;
                         height: 100vh;
                         max-height: 100vh;
                         overflow: hidden;
-                        gap: 0.5rem;
-                        justify-content: space-between;
+                        display: flex;
+                        background: rgba(0, 0, 0, 0.9);
                     }
 
                     .gslide-media-wrap {
-                        width: 100%;
-                        height: 75vh;
+                        width: 100vw;
+                        height: 65vh;
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -698,64 +698,78 @@
                     }
 
                     .gslide-media img {
-                        max-width: 100%;
-                        max-height: 75vh;
+                        max-width: 100vw;
+                        max-height: 65vh;
                         width: auto;
                         height: auto;
                         object-fit: contain;
                     }
 
                     .gslide-desc-box {
-                        width: 100%;
-                        height: 23vh;
-                        min-height: 23vh;
+                        width: 100vw;
+                        height: 35vh;
                         margin: 0;
-                        padding: 1rem;
-                        background: rgba(26, 26, 26, 0.98);
+                        padding: 1.5rem;
+                        background: #1a1a1a;
                         overflow-y: auto;
-                        border-radius: 8px;
+                    }
+
+                    .gdesc-inner {
+                        max-width: 100%;
                     }
 
                     .gslide-title {
+                        color: #ffffff;
                         font-size: 1.1rem;
                         margin-bottom: 0.75rem;
                         padding-bottom: 0.75rem;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
                     }
 
                     .gslide-desc {
+                        color: #ffffff;
                         font-size: 0.95rem;
                         line-height: 1.4;
+                        opacity: 0.9;
                     }
 
                     .shot-details {
                         margin-top: 0.75rem;
                         padding-top: 0.75rem;
+                        border-top: 1px solid rgba(255, 255, 255, 0.2);
                     }
 
                     .shot-details h3 {
+                        color: #ffffff;
                         font-size: 1rem;
                         margin-bottom: 0.5rem;
                     }
 
+                    .shot-details ul {
+                        margin: 0;
+                        padding: 0;
+                    }
+
                     .shot-details ul li {
+                        color: #ffffff;
                         font-size: 0.95rem;
                         margin-bottom: 0.5rem;
+                        opacity: 0.9;
                     }
                 }
 
                 /* Adjustments for horizontal images */
                 @media (max-width: 768px) and (orientation: landscape) {
                     .gslide-media-wrap {
-                        height: 65vh;
+                        height: 70vh;
                     }
 
                     .gslide-media img {
-                        max-height: 65vh;
+                        max-height: 70vh;
                     }
 
                     .gslide-desc-box {
-                        height: 32vh;
-                        min-height: 32vh;
+                        height: 30vh;
                     }
                 }
 
@@ -770,8 +784,18 @@
                     }
 
                     .gslide-desc-box {
-                        height: 38vh;
-                        min-height: 38vh;
+                        height: 40vh;
+                    }
+                }
+
+                /* Desktop styles */
+                @media (min-width: 769px) {
+                    .gslide-desc-box {
+                        background: rgba(26, 26, 26, 0.95);
+                    }
+
+                    .gslide-title, .gslide-desc, .shot-details h3, .shot-details ul li {
+                        color: #ffffff;
                     }
                 }
             `;
@@ -957,4 +981,5 @@
         });
     </script>
 </body>
+</html>
 </html>
